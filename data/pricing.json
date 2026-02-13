@@ -1,0 +1,46 @@
+{
+  "tiers": [
+    {
+      "name": "Small",
+      "description": "Walkways, steps, small driveways",
+      "sqft_range": "Up to 200 sq ft",
+      "price_range": "$99 - $199",
+      "features": [
+        "Surface pressure cleaning",
+        "Edge detailing",
+        "Basic stain treatment",
+        "Debris cleanup",
+        "Same-day service available"
+      ]
+    },
+    {
+      "name": "Medium",
+      "description": "Full driveways, patios, pool decks",
+      "sqft_range": "200 - 600 sq ft",
+      "price_range": "$199 - $399",
+      "features": [
+        "Full surface pressure cleaning",
+        "Edge & joint detailing",
+        "Oil & rust stain treatment",
+        "Sealer application included",
+        "Before & after photos",
+        "2-day turnaround"
+      ]
+    },
+    {
+      "name": "Large",
+      "description": "Full property, multiple surfaces",
+      "sqft_range": "600+ sq ft",
+      "price_range": "$399 - $899+",
+      "features": [
+        "Complete property cleaning",
+        "All concrete surfaces included",
+        "Deep stain & algae removal",
+        "Premium sealer application",
+        "Before & after photos",
+        "Follow-up inspection",
+        "Priority scheduling"
+      ]
+    }
+  ]
+}

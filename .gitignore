@@ -1,0 +1,26 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (for tools)
+node_modules/
+
+# Environment
+.env
+.env.local
+
+# Claude Code session artifacts
+.claude/plans/
+
+# Vercel
+.vercel/
+
+# Logs
+*.log

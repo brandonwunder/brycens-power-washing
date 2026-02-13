@@ -1,0 +1,46 @@
+{
+  "reviews": [
+    {
+      "name": "Maria S.",
+      "location": "Phoenix, AZ",
+      "rating": 5,
+      "text": "AZ Concrete King transformed our driveway! It looked brand new after they were done. Professional, on time, and great pricing.",
+      "date": "2025-03-10"
+    },
+    {
+      "name": "James T.",
+      "location": "Scottsdale, AZ",
+      "rating": 5,
+      "text": "Had our entire patio and pool deck cleaned. The before and after difference was incredible. Highly recommend!",
+      "date": "2025-02-22"
+    },
+    {
+      "name": "Linda R.",
+      "location": "Mesa, AZ",
+      "rating": 5,
+      "text": "Fast, affordable, and the results speak for themselves. Our walkway looks amazing. Will definitely use them again.",
+      "date": "2025-01-15"
+    },
+    {
+      "name": "Robert K.",
+      "location": "Tempe, AZ",
+      "rating": 4,
+      "text": "Great service overall. They were thorough and left everything spotless. The crew was friendly and professional.",
+      "date": "2025-04-05"
+    },
+    {
+      "name": "Sarah M.",
+      "location": "Chandler, AZ",
+      "rating": 5,
+      "text": "Best power washing company in the valley! They cleaned years of grime off our concrete in no time. Worth every penny.",
+      "date": "2025-05-12"
+    },
+    {
+      "name": "David W.",
+      "location": "Gilbert, AZ",
+      "rating": 5,
+      "text": "I was amazed at the difference. Our garage floor and driveway look brand new. Very reasonable prices too.",
+      "date": "2025-06-01"
+    }
+  ]
+}
