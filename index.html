@@ -1,0 +1,4379 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>AZ Concrete King | Pressure Washing in Anthem & Vistancia</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet"><style>*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #e2e8f0;
+    line-height: 1.6;
+    background: #050a14;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+:root {
+    --blue: #0088ff;
+    --cyan: #00d4ff;
+    --navy: #050a14;
+    --navy2: #0a1225;
+    --navy3: #0f1a30;
+    --gold: #fbbf24;
+    --gold-dark: #d97706;
+    --white: #ffffff;
+    --gray: #94a3b8;
+    --green: #22c55e;
+    --glow-blue: rgba(0, 136, 255, .25);
+    --glow-cyan: rgba(0, 212, 255, .2);
+}
+
+/* SPLASH */
+#splash {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: opacity .8s, visibility .8s;
+    overflow: hidden;
+}
+
+#splash.done {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.splash-center {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Crown */
+.splash-crown {
+    width: 160px;
+    height: 160px;
+    animation: crownDrop .8s cubic-bezier(.34, 1.56, .64, 1) forwards;
+    opacity: 0;
+    position: relative;
+    z-index: 3;
+    filter: drop-shadow(0 0 0 transparent);
+}
+
+.splash-crown.landed {
+    filter: drop-shadow(0 0 30px rgba(251, 191, 36, .6)) drop-shadow(0 0 60px rgba(0, 212, 255, .3));
+}
+
+@keyframes crownDrop {
+    0% {
+        transform: translateY(-80px) scale(.3) rotate(-20deg);
+        opacity: 0;
+    }
+    60% {
+        transform: translateY(5px) scale(1.1) rotate(3deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Radial light pulse */
+.splash-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    margin-top: -5px;
+    margin-left: -5px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 212, 255, .6), transparent 70%);
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.splash-pulse.fire {
+    animation: pulseBlast .9s .8s cubic-bezier(.25, .46, .45, .94) forwards;
+}
+
+@keyframes pulseBlast {
+    0% {
+        transform: scale(1);
+        opacity: .8;
+    }
+    50% {
+        opacity: .4;
+    }
+    100% {
+        transform: scale(80);
+        opacity: 0;
+    }
+}
+
+/* Particle explosion */
+.splash-particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0;
+}
+
+/* Glitch title */
+.splash-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    letter-spacing: 6px;
+    color: var(--white);
+    margin-top: 1.2rem;
+    opacity: 0;
+    position: relative;
+    z-index: 3;
+}
+
+.splash-title.glitch-in {
+    animation: glitchIn .8s 1s steps(1) forwards;
+}
+
+.splash-title .az {
+    color: var(--cyan);
+}
+
+@keyframes glitchIn {
+    0% { opacity: 1; transform: translate(0); clip-path: inset(0 0 100% 0); }
+    10% { clip-path: inset(40% 0 30% 0); transform: translate(-3px, 2px) skewX(-2deg); }
+    15% { clip-path: inset(10% 0 60% 0); transform: translate(3px, -1px) skewX(3deg); }
+    20% { clip-path: inset(70% 0 5% 0); transform: translate(-2px, 1px) skewX(-1deg); }
+    25% { clip-path: inset(20% 0 40% 0); transform: translate(2px, -2px) skewX(2deg); }
+    35% { clip-path: inset(0 0 50% 0); transform: translate(-1px, 1px); }
+    45% { clip-path: inset(50% 0 0 0); transform: translate(1px, -1px); }
+    55% { clip-path: inset(0); transform: translate(-1px, 0) skewX(-1deg); }
+    65% { transform: translate(1px, 0) skewX(1deg); }
+    75% { transform: translate(0) skewX(0); }
+    100% { opacity: 1; transform: translate(0); clip-path: inset(0); }
+}
+
+.splash-title::before,
+.splash-title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.splash-title.glitch-in::before {
+    color: var(--cyan);
+    animation: glitchLayer1 .8s 1s steps(1) forwards;
+    z-index: -1;
+}
+
+.splash-title.glitch-in::after {
+    color: var(--blue);
+    animation: glitchLayer2 .8s 1s steps(1) forwards;
+    z-index: -1;
+}
+
+@keyframes glitchLayer1 {
+    0%, 75% { opacity: .7; transform: translate(-2px, -1px); }
+    10% { transform: translate(2px, 1px); }
+    20% { transform: translate(-1px, 2px); }
+    30% { transform: translate(3px, -1px); }
+    76%, 100% { opacity: 0; transform: translate(0); }
+}
+
+@keyframes glitchLayer2 {
+    0%, 75% { opacity: .7; transform: translate(2px, 1px); }
+    15% { transform: translate(-2px, -1px); }
+    25% { transform: translate(1px, -2px); }
+    35% { transform: translate(-3px, 1px); }
+    76%, 100% { opacity: 0; transform: translate(0); }
+}
+
+/* Percentage counter */
+.splash-loader {
+    margin-top: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .6rem;
+    opacity: 0;
+    animation: fadeUp .4s 1.2s forwards;
+    z-index: 3;
+}
+
+.splash-percent {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+    color: var(--cyan);
+    text-shadow: 0 0 20px rgba(0, 212, 255, .5);
+}
+
+.splash-bar {
+    width: 200px;
+    height: 3px;
+    background: var(--navy3);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.splash-fill {
+    width: 0;
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--blue), var(--cyan));
+    box-shadow: 0 0 12px var(--cyan), 0 0 4px var(--blue);
+    transition: width .05s linear;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Splash background particles */
+.splash-bg-particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: rgba(0, 212, 255, .15);
+    animation: floatUp linear infinite;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: .3; }
+    100% { transform: translateY(-100vh) scale(0); opacity: 0; }
+}
+
+/* NAV */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(5, 10, 20, .7);
+    backdrop-filter: blur(24px) saturate(1.5);
+    -webkit-backdrop-filter: blur(24px) saturate(1.5);
+    border-bottom: 1px solid rgba(255, 255, 255, .04);
+    transition: background .3s;
+}
+
+nav.scrolled {
+    background: rgba(5, 10, 20, .95);
+}
+
+.nav-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    padding: 0 2rem;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.7rem;
+    letter-spacing: 3px;
+}
+
+.nav-logo img {
+    height: 40px;
+    width: auto;
+}
+
+.nav-logo .az {
+    color: var(--cyan);
+}
+
+.nav-logo .king {
+    color: var(--white);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.8rem;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--gray);
+    font-size: .88rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color .2s;
+}
+
+.nav-links a:hover {
+    color: var(--white);
+}
+
+.nav-cta {
+    background: linear-gradient(135deg, var(--blue), var(--cyan)) !important;
+    color: var(--navy) !important;
+    font-weight: 800 !important;
+    padding: .6rem 1.4rem;
+    border-radius: 8px;
+    box-shadow: 0 0 20px var(--glow-blue);
+    transition: transform .2s, box-shadow .2s;
+}
+
+.nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 35px var(--glow-blue);
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    margin: 5px 0;
+    background: var(--white);
+    border-radius: 2px;
+}
+
+/* HERO */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 2rem 7rem;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('Background picture.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.12;
+    z-index: 0;
+}
+
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(5, 10, 20, 0.4) 0%, rgba(5, 10, 20, 0.7) 70%, rgba(5, 10, 20, 0.95) 100%);
+}
+
+.hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(0, 136, 255, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 136, 255, .05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridPan 20s linear infinite;
+}
+
+@keyframes gridPan {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(60px, 60px);
+    }
+}
+
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.wdrop {
+    position: absolute;
+    background: linear-gradient(to bottom, rgba(0, 212, 255, .7), rgba(0, 136, 255, .1));
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: wfall linear infinite;
+    opacity: 0;
+}
+
+@keyframes wfall {
+    0% {
+        transform: translateY(-20px) rotate(12deg);
+        opacity: 0;
+    }
+
+    8% {
+        opacity: .8;
+    }
+
+    85% {
+        opacity: .2;
+    }
+
+    100% {
+        transform: translateY(105vh) rotate(12deg);
+        opacity: 0;
+    }
+}
+
+.hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+}
+
+.hero-orb.o1 {
+    width: 500px;
+    height: 500px;
+    top: 10%;
+    left: -10%;
+    background: rgba(0, 136, 255, .12);
+    animation: orbF 8s ease-in-out infinite alternate;
+}
+
+.hero-orb.o2 {
+    width: 400px;
+    height: 400px;
+    bottom: 10%;
+    right: -5%;
+    background: rgba(0, 212, 255, .08);
+    animation: orbF 6s 2s ease-in-out infinite alternate;
+}
+
+.hero-orb.o3 {
+    width: 300px;
+    height: 300px;
+    top: 50%;
+    left: 40%;
+    background: rgba(251, 191, 36, .05);
+    animation: orbF 10s 1s ease-in-out infinite alternate;
+}
+
+@keyframes orbF {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(30px, -20px);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+
+.hero-crown {
+    display: block;
+    width: 240px;
+    height: 240px;
+    margin: 0 auto 1.5rem;
+    animation: hFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(251, 191, 36, .4));
+}
+
+@keyframes hFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: rgba(0, 212, 255, .06);
+    border: 1px solid rgba(0, 212, 255, .15);
+    color: var(--cyan);
+    font-weight: 700;
+    font-size: .75rem;
+    padding: .45rem 1.3rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.hero-badge .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cyan);
+    animation: dotP 2s infinite;
+}
+
+@keyframes dotP {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 212, 255, .5);
+    }
+
+    50% {
+        box-shadow: 0 0 0 6px transparent;
+    }
+}
+
+.hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.8rem, 10vw, 8rem);
+    color: var(--white);
+    line-height: .9;
+    letter-spacing: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.hero h1 .glow {
+    display: block;
+    background: linear-gradient(90deg, var(--cyan), var(--blue), var(--cyan));
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.hero-sub {
+    font-size: 1.15rem;
+    color: var(--gray);
+    max-width: 550px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+}
+
+.hero-sub strong {
+    color: var(--white);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 1rem 2.4rem;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    transition: all .25s;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn-power {
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: var(--navy);
+    box-shadow: 0 0 30px var(--glow-blue), 0 8px 30px rgba(0, 0, 0, .3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-power::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(transparent, rgba(255, 255, 255, .1), transparent);
+    transform: rotate(45deg);
+    animation: btnShine 3s infinite;
+}
+
+@keyframes btnShine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+
+    30%,
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+.btn-dark {
+    background: rgba(255, 255, 255, .04);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, .1);
+}
+
+.btn-dark:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+}
+
+.scroll-ind {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .4rem;
+    color: rgba(255, 255, 255, .2);
+    font-size: .65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    z-index: 2;
+}
+
+.scroll-mouse {
+    width: 22px;
+    height: 34px;
+    border: 2px solid rgba(255, 255, 255, .15);
+    border-radius: 11px;
+    position: relative;
+}
+
+.scroll-mouse::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 7px;
+    background: var(--cyan);
+    border-radius: 3px;
+    animation: scD 2s infinite;
+}
+
+@keyframes scD {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(10px);
+        opacity: 0;
+    }
+}
+
+/* TRUST STRIP */
+.trust-strip {
+    background: var(--navy2);
+    border-top: 1px solid rgba(0, 136, 255, .08);
+    border-bottom: 1px solid rgba(0, 136, 255, .08);
+    overflow: hidden;
+}
+
+.trust-scroll {
+    display: flex;
+    align-items: center;
+    animation: tScroll 20s linear infinite;
+    width: max-content;
+}
+
+@keyframes tScroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: 1.1rem 2rem;
+    white-space: nowrap;
+    font-weight: 700;
+    font-size: .82rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.trust-item svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.trust-sep {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(0, 136, 255, .3);
+    margin: 0 .8rem;
+    display: inline-block;
+}
+
+/* SECTIONS */
+section {
+    padding: 7rem 2rem;
+    position: relative;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.sec-label {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: .72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--cyan);
+    margin-bottom: .8rem;
+}
+
+.sec-label .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--cyan);
+}
+
+.sec-head {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.sec-head h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--white);
+    letter-spacing: 3px;
+    line-height: 1;
+}
+
+.sec-head p {
+    color: var(--gray);
+    max-width: 550px;
+    margin: 1rem auto 0;
+    font-size: 1.05rem;
+}
+
+.sec-glow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: .3;
+}
+
+/* ABOUT */
+#about {
+    background: var(--navy);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.about-visual {
+    position: relative;
+}
+
+.about-card-main {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #0d1a2f, #132240);
+    border: 1px solid rgba(0, 136, 255, .18);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, .5), 0 0 40px rgba(0, 136, 255, .08), 0 1px 0 rgba(255, 255, 255, .06) inset;
+}
+
+.pw-scene {
+    position: absolute;
+    inset: 0;
+}
+
+.pw-scene svg {
+    width: 100%;
+    height: 100%;
+}
+
+.about-badge {
+    position: absolute;
+    bottom: -16px;
+    right: -16px;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    box-shadow: 0 10px 40px rgba(0, 136, 255, .3);
+    z-index: 3;
+}
+
+.about-badge-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, .2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-badge-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.about-badge-text {
+    color: var(--navy);
+    font-size: .8rem;
+}
+
+.about-badge-text strong {
+    display: block;
+    font-size: 1.1rem;
+}
+
+.about-text h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+}
+
+.about-text p {
+    color: var(--gray);
+    margin-bottom: 1rem;
+    font-size: .95rem;
+}
+
+.about-text p strong {
+    color: var(--white);
+}
+
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2.5rem;
+}
+
+.astat {
+    background: linear-gradient(135deg, #0d1a2f, #132240);
+    border: 1px solid rgba(0, 136, 255, .18);
+    border-radius: 12px;
+    padding: 1.2rem;
+    text-align: center;
+    transition: all .3s;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .05) inset;
+}
+
+.astat:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 8px 30px rgba(0, 136, 255, .15);
+}
+
+.astat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--cyan);
+    letter-spacing: 1px;
+}
+
+.astat-lbl {
+    font-size: .7rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+}
+
+/* SERVICES */
+#services {
+    background: var(--navy2);
+}
+
+.svc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.svc-card {
+    background: linear-gradient(135deg, #111d35, #182848);
+    border: 1px solid rgba(0, 170, 255, .25);
+    border-radius: 14px;
+    padding: 2.2rem 1.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: all .35s;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .4), 0 0 25px rgba(0, 136, 255, .1), 0 1px 0 rgba(255, 255, 255, .08) inset;
+}
+
+.svc-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--cyan));
+    opacity: .4;
+    transition: opacity .35s;
+}
+
+.svc-card:hover::before {
+    opacity: 1;
+    height: 3px;
+}
+
+.svc-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 136, 255, .2), 0 0 40px rgba(0, 212, 255, .1);
+    border-color: rgba(0, 136, 255, .35);
+}
+
+.svc-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: rgba(0, 170, 255, .1);
+    position: absolute;
+    top: .8rem;
+    right: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.svc-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(0, 136, 255, .15), rgba(0, 212, 255, .08));
+    border: 1px solid rgba(0, 212, 255, .12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.svc-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.svc-card h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: .5rem;
+}
+
+.svc-card p {
+    font-size: .88rem;
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+/* BEFORE/AFTER */
+#results {
+    background: var(--navy);
+}
+
+.ba-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.ba-card {
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    height: 350px;
+    cursor: col-resize;
+    border: 1px solid rgba(0, 136, 255, .1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, .4);
+}
+
+.ba-before,
+.ba-after {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+.ba-before {
+    z-index: 1;
+    clip-path: inset(0 50% 0 0);
+}
+
+.ba-after {
+    z-index: 0;
+}
+
+.ba-div {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    background: var(--white);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.ba-div::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--white);
+    box-shadow: 0 0 20px rgba(0, 0, 0, .4);
+}
+
+.ba-div svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+    width: 16px;
+    height: 16px;
+    fill: var(--navy);
+}
+
+.ba-tag-b,
+.ba-tag-a {
+    position: absolute;
+    bottom: 12px;
+    z-index: 3;
+    font-size: .65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: .3rem .8rem;
+    border-radius: 6px;
+    color: var(--white);
+}
+
+.ba-tag-b {
+    left: 12px;
+    background: rgba(255, 0, 0, .5);
+}
+
+.ba-tag-a {
+    right: 12px;
+    background: rgba(0, 136, 255, .6);
+}
+
+.ba-caption {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 6;
+    font-size: .7rem;
+    font-weight: 700;
+    padding: .3rem .8rem;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, .6);
+    color: var(--white);
+}
+
+/* PRICING */
+#pricing {
+    background: var(--navy2);
+    position: relative;
+    overflow: hidden;
+}
+
+#pricing::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 136, 255, .06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.price-badge {
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+    background: linear-gradient(160deg, #111d35, #162242);
+    border: 1px solid rgba(0, 170, 255, .2);
+    border-radius: 14px;
+    padding: 1.6rem 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .3), 0 0 20px rgba(0, 136, 255, .06);
+}
+
+.price-badge-icon {
+    width: 42px;
+    height: 42px;
+    margin: 0 auto .8rem;
+    border-radius: 50%;
+    background: rgba(34, 197, 94, .1);
+    border: 1px solid rgba(34, 197, 94, .2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.price-badge-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.price-badge h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    color: var(--green);
+    margin-bottom: .8rem;
+}
+
+.price-badge-lines {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+}
+
+.price-badge-lines span {
+    font-size: .85rem;
+    color: var(--gray);
+    line-height: 1.5;
+}
+
+.price-badge-lines strong {
+    color: var(--white);
+}
+
+@media (max-width: 480px) {
+    .price-badge {
+        max-width: 100%;
+        padding: 1.4rem 1.5rem;
+    }
+    .price-badge-lines span {
+        font-size: .8rem;
+    }
+}
+
+.price-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.pcard {
+    background: linear-gradient(160deg, #111d35, #162242);
+    border: 1px solid rgba(0, 170, 255, .2);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all .35s;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .5), 0 0 20px rgba(0, 136, 255, .06), 0 1px 0 rgba(255, 255, 255, .06) inset;
+}
+
+.pcard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0, 136, 255, .2), 0 0 40px rgba(0, 212, 255, .1);
+    border-color: rgba(0, 170, 255, .4);
+}
+
+.pcard.pop {
+    background: linear-gradient(160deg, #0f1f3d, #132a4d);
+    border: 2px solid rgba(0, 180, 255, .4);
+    border-radius: 18px;
+    transform: scale(1.04);
+    box-shadow:
+        0 10px 50px rgba(0, 136, 255, .25),
+        0 0 60px rgba(0, 212, 255, .12),
+        0 0 0 1px rgba(0, 212, 255, .1) inset,
+        0 1px 0 rgba(255, 255, 255, .08) inset;
+    z-index: 2;
+    position: relative;
+}
+
+.pcard.pop:hover {
+    transform: scale(1.04) translateY(-6px);
+    box-shadow:
+        0 25px 70px rgba(0, 136, 255, .35),
+        0 0 80px rgba(0, 212, 255, .15),
+        0 0 0 1px rgba(0, 212, 255, .15) inset;
+    border-color: rgba(0, 212, 255, .5);
+}
+
+.pcard-head {
+    padding: 2rem 1.8rem 1.4rem;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, .05);
+}
+
+.pcard.pop .pcard-head {
+    background: linear-gradient(160deg, rgba(0, 136, 255, .12), rgba(0, 212, 255, .04));
+    padding: 2.2rem 1.8rem 1.5rem;
+}
+
+.pop-tag {
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: var(--navy);
+    font-size: .65rem;
+    font-weight: 900;
+    padding: .35rem 1.2rem;
+    border-radius: 0 0 10px 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(0, 136, 255, .3);
+}
+
+.pcard-head h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    color: var(--white);
+    letter-spacing: 2px;
+}
+
+.pcard.pop .pcard-head h3 {
+    font-size: 1.8rem;
+    background: linear-gradient(90deg, var(--white), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.pcard-head .sub {
+    font-size: .82rem;
+    color: var(--gray);
+    margin-top: .3rem;
+}
+
+.pcard-body {
+    padding: 1.5rem 1.8rem;
+}
+
+.pcard.pop .pcard-body {
+    padding: 1.8rem 2rem;
+}
+
+.pline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .04);
+    font-size: .88rem;
+}
+
+.pline:last-child {
+    border-bottom: none;
+}
+
+.pline .lbl {
+    color: var(--gray);
+}
+
+.pline .val {
+    font-weight: 800;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .95rem;
+}
+
+.pcard.pop .pline .val {
+    color: var(--cyan);
+    text-shadow: 0 0 20px rgba(0, 212, 255, .3);
+}
+
+.pline .old {
+    text-decoration: line-through;
+    color: #475569;
+    font-weight: 500;
+    font-size: .78rem;
+}
+
+.pline .save {
+    background: rgba(34, 197, 94, .12);
+    color: var(--green);
+    font-size: .6rem;
+    font-weight: 800;
+    padding: .2rem .5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    border: 1px solid rgba(34, 197, 94, .15);
+}
+
+.pcard-foot {
+    padding: 0 1.8rem 1.8rem;
+}
+
+.pcard.pop .pcard-foot {
+    padding: 0 2rem 2rem;
+}
+
+.pcard-foot a {
+    display: block;
+    text-align: center;
+    padding: .85rem;
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: .9rem;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    transition: all .25s;
+    background: rgba(0, 136, 255, .08);
+    color: var(--cyan);
+    border: 1px solid rgba(0, 136, 255, .2);
+}
+
+.pcard-foot a:hover {
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: var(--navy);
+    border-color: transparent;
+    box-shadow: 0 0 30px var(--glow-blue);
+    transform: translateY(-2px);
+}
+
+.pcard.pop .pcard-foot a {
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: var(--navy);
+    border: none;
+    box-shadow: 0 0 30px var(--glow-blue);
+    padding: 1rem;
+    font-size: .95rem;
+}
+
+.pcard.pop .pcard-foot a:hover {
+    box-shadow: 0 0 50px rgba(0, 136, 255, .4), 0 4px 20px rgba(0, 0, 0, .3);
+}
+
+.addons {
+    max-width: 700px;
+    margin: 3rem auto 0;
+    background: linear-gradient(160deg, #111d35, #162242);
+    border: 1px solid rgba(0, 170, 255, .18);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .4), 0 0 20px rgba(0, 136, 255, .06), 0 1px 0 rgba(255, 255, 255, .06) inset;
+}
+
+.addons-head {
+    padding: 1rem 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    background: linear-gradient(135deg, rgba(0, 136, 255, .08), rgba(0, 212, 255, .03));
+    border-bottom: 1px solid rgba(0, 136, 255, .1);
+}
+
+.addons-head h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.15rem;
+    color: var(--white);
+    letter-spacing: 1.5px;
+}
+
+.addons-body {
+    padding: 1rem 1.8rem;
+}
+
+/* WHY */
+#why {
+    background: var(--navy);
+}
+
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.why-card {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 136, 255, .18);
+    background: linear-gradient(135deg, #0d1a2f, #132240);
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .5), 0 0 20px rgba(0, 136, 255, .06), 0 1px 0 rgba(255, 255, 255, .06) inset;
+}
+
+.why-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--cyan));
+    transform: scaleX(0);
+    transition: transform .3s;
+}
+
+.why-card:hover::after {
+    transform: scaleX(1);
+}
+
+.why-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0, 136, 255, .2), 0 0 40px rgba(0, 212, 255, .1);
+    border-color: rgba(0, 136, 255, .35);
+}
+
+.why-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(0, 136, 255, .1), rgba(0, 212, 255, .05));
+    border: 1px solid rgba(0, 136, 255, .1);
+}
+
+.why-icon svg {
+    width: 26px;
+    height: 26px;
+}
+
+.why-card h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: .5rem;
+}
+
+.why-card p {
+    color: var(--gray);
+    font-size: .88rem;
+}
+
+/* QUOTE */
+#quote {
+    background: var(--navy2);
+    position: relative;
+    overflow: hidden;
+}
+
+#quote::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('pic 3.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.18;
+    z-index: 0;
+}
+
+#quote::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(10, 18, 37, 0.1) 0%, rgba(10, 18, 37, 0.5) 70%, rgba(10, 18, 37, 0.85) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+#quote .container {
+    position: relative;
+    z-index: 2;
+}
+
+.quote-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .03;
+    background-image: repeating-linear-gradient(90deg, var(--cyan), var(--cyan) 1px, transparent 1px, transparent 80px);
+}
+
+.quote-wrap {
+    max-width: 740px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #0d1a2f, #132240);
+    border: 1px solid rgba(0, 136, 255, .18);
+    border-radius: 18px;
+    padding: 3rem;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, .5), 0 0 40px rgba(0, 136, 255, .08), 0 1px 0 rgba(255, 255, 255, .06) inset;
+    position: relative;
+    z-index: 2;
+}
+
+.fgrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+}
+
+.fgroup label {
+    display: block;
+    margin-bottom: .4rem;
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.fgroup input,
+.fgroup select,
+.fgroup textarea {
+    width: 100%;
+    padding: .85rem 1rem;
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: 10px;
+    font-size: .92rem;
+    background: var(--navy2);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    transition: all .2s;
+}
+
+.fgroup input::placeholder,
+.fgroup textarea::placeholder {
+    color: #334155;
+}
+
+.fgroup input:focus,
+.fgroup select:focus,
+.fgroup textarea:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, .1);
+}
+
+.fgroup select option {
+    background: var(--navy);
+}
+
+.fgroup textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.fgroup.full {
+    grid-column: 1 / -1;
+}
+
+.photo-upload {
+    grid-column: 1 / -1;
+}
+
+.photo-upload label {
+    display: block;
+    margin-bottom: .4rem;
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.upload-area {
+    border: 2px dashed rgba(0, 212, 255, .2);
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all .3s;
+    background: rgba(13, 26, 47, .5);
+}
+
+.upload-area:hover {
+    border-color: var(--cyan);
+    background: rgba(0, 212, 255, .04);
+}
+
+.upload-area svg {
+    width: 36px;
+    height: 36px;
+    margin-bottom: .6rem;
+    opacity: .5;
+}
+
+.upload-area p {
+    color: var(--gray);
+    font-size: .85rem;
+    margin: 0;
+}
+
+.upload-area p span {
+    color: var(--cyan);
+    font-weight: 600;
+}
+
+.upload-area small {
+    display: block;
+    color: #334155;
+    font-size: .75rem;
+    margin-top: .3rem;
+}
+
+.upload-area input[type="file"] {
+    display: none;
+}
+
+.upload-preview {
+    display: none;
+    margin-top: .8rem;
+    padding: .6rem .8rem;
+    background: var(--navy2);
+    border-radius: 8px;
+    align-items: center;
+    gap: .6rem;
+    font-size: .82rem;
+    color: var(--gray);
+}
+
+.upload-preview.active {
+    display: flex;
+}
+
+.upload-preview .file-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.upload-preview .remove-file {
+    color: #ef4444;
+    cursor: pointer;
+    font-size: .75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.upload-preview .remove-file:hover {
+    color: #f87171;
+}
+
+.form-btn {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.form-btn button {
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: var(--navy);
+    padding: 1.1rem 3rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: 900;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all .25s;
+    box-shadow: 0 0 30px var(--glow-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-btn button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 50px var(--glow-blue);
+}
+
+.form-note {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: .78rem;
+    color: #334155;
+}
+
+#formSuccess {
+    display: none;
+    text-align: center;
+    padding: 3rem;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: popIn .5s cubic-bezier(.175, .885, .32, 1.275);
+    box-shadow: 0 0 40px var(--glow-blue);
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.success-icon svg {
+    width: 36px;
+    height: 36px;
+}
+
+/* REVIEWS */
+#reviews {
+    background: var(--navy);
+}
+
+.rev-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.rev-card {
+    background: linear-gradient(135deg, #0d1a2f, #132240);
+    border: 1px solid rgba(0, 136, 255, .18);
+    border-radius: 14px;
+    padding: 2rem;
+    transition: all .3s;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .5), 0 0 20px rgba(0, 136, 255, .06), 0 1px 0 rgba(255, 255, 255, .06) inset;
+}
+
+.rev-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 136, 255, .2), 0 0 40px rgba(0, 212, 255, .1);
+    border-color: rgba(0, 136, 255, .35);
+}
+
+.rev-stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 1rem;
+}
+
+.rev-stars svg {
+    width: 16px;
+    height: 16px;
+    fill: var(--gold);
+}
+
+.rev-quote {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-family: Georgia, serif;
+    font-size: 4rem;
+    line-height: 1;
+    color: rgba(0, 136, 255, .06);
+}
+
+.rev-card p {
+    font-size: .92rem;
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.rev-author {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+}
+
+.rev-av {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--navy);
+    font-weight: 900;
+    font-size: .8rem;
+}
+
+.rev-name {
+    font-weight: 700;
+    font-size: .88rem;
+    color: var(--white);
+}
+
+.rev-loc {
+    font-size: .75rem;
+    color: var(--gray);
+}
+
+/* FAQ */
+#faq {
+    background: var(--navy2);
+}
+
+.faq-list {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    border: 1px solid rgba(0, 136, 255, .15);
+    border-radius: 12px;
+    margin-bottom: .8rem;
+    overflow: hidden;
+    transition: all .2s;
+    background: linear-gradient(135deg, #0d1a2f, #132240);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .4), 0 1px 0 rgba(255, 255, 255, .05) inset;
+}
+
+.faq-item:hover,
+.faq-item.open {
+    border-color: rgba(0, 136, 255, .3);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .4), 0 0 25px rgba(0, 136, 255, .08);
+}
+
+.faq-q {
+    font-weight: 700;
+    font-size: .95rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--white);
+    padding: 1.2rem 1.5rem;
+    transition: background .2s;
+}
+
+.faq-q:hover {
+    background: rgba(0, 136, 255, .03);
+}
+
+.faq-tog {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(0, 136, 255, .08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all .3s;
+}
+
+.faq-tog svg {
+    width: 14px;
+    height: 14px;
+    transition: transform .3s;
+}
+
+.faq-item.open .faq-tog {
+    background: var(--blue);
+}
+
+.faq-item.open .faq-tog svg {
+    transform: rotate(45deg);
+    stroke: var(--navy);
+}
+
+.faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .35s, padding .35s;
+    color: var(--gray);
+    font-size: .92rem;
+    padding: 0 1.5rem;
+}
+
+.faq-item.open .faq-a {
+    max-height: 200px;
+    padding: 0 1.5rem 1.2rem;
+}
+
+/* CTA */
+.cta {
+    background: linear-gradient(135deg, var(--blue), #0055aa);
+    padding: 5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, .15) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(0, 212, 255, .1) 0%, transparent 50%);
+}
+
+.cta h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    color: var(--white);
+    letter-spacing: 3px;
+    position: relative;
+}
+
+.cta p {
+    color: rgba(255, 255, 255, .7);
+    margin: 1rem auto;
+    max-width: 450px;
+    position: relative;
+}
+
+.cta .btn {
+    position: relative;
+    background: var(--white);
+    color: var(--navy);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .3);
+    margin-top: .5rem;
+}
+
+/* FOOTER */
+footer {
+    background: var(--navy);
+    color: var(--gray);
+    padding: 4rem 2rem 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, .03);
+}
+
+.ft-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+}
+
+.ft-brand .ft-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.ft-logo img {
+    height: 36px;
+    width: auto;
+}
+
+.ft-logo .az {
+    color: var(--cyan);
+}
+
+.ft-logo .king {
+    color: var(--white);
+}
+
+.ft-brand p {
+    font-size: .85rem;
+    line-height: 1.7;
+}
+
+.ft-col h4 {
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.ft-col a {
+    display: block;
+    color: var(--gray);
+    margin-bottom: .6rem;
+    font-size: .85rem;
+    transition: color .2s;
+}
+
+.ft-col a:hover {
+    color: var(--cyan);
+}
+
+.ft-bottom {
+    max-width: 1300px;
+    margin: 3rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, .04);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .8rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+
+    .svc-grid,
+    .price-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ba-grid {
+        grid-template-columns: 1fr;
+        max-width: 450px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ft-inner {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: rgba(5, 10, 20, .98);
+        backdrop-filter: blur(24px);
+        padding: 1.5rem 2rem;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(0, 136, 255, .08);
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .svc-grid,
+    .price-grid,
+    .rev-grid,
+    .why-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fgrid {
+        grid-template-columns: 1fr;
+    }
+
+    .quote-wrap {
+        padding: 2rem 1.5rem;
+    }
+
+    .ft-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .ft-bottom {
+        flex-direction: column;
+        gap: .5rem;
+        text-align: center;
+    }
+}
+
+/* REVEAL */
+.rv {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1);
+}
+
+.rv.vis {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.rvl {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1);
+}
+
+.rvl.vis {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.rvr {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1);
+}
+
+.rvr.vis {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.d1 {
+    transition-delay: .05s
+}
+
+.d2 {
+    transition-delay: .1s
+}
+
+.d3 {
+    transition-delay: .15s
+}
+
+.d4 {
+    transition-delay: .2s
+}
+
+.d5 {
+    transition-delay: .25s
+}
+
+.d6 {
+    transition-delay: .3s
+}
+
+/* ADMIN PANEL */
+.admin-link {
+    color: #334155 !important;
+    font-size: .7rem !important;
+    opacity: .4;
+    transition: opacity .2s;
+}
+.admin-link:hover {
+    opacity: 1;
+    color: var(--cyan) !important;
+}
+
+#adminOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: #050a14;
+    overflow-y: auto;
+}
+
+#adminOverlay.active {
+    display: block;
+}
+
+.admin-topbar {
+    background: #0a1225;
+    border-bottom: 1px solid rgba(0, 136, 255, .15);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.admin-topbar h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--white);
+}
+
+.admin-topbar h2 span {
+    color: var(--cyan);
+}
+
+.admin-close {
+    background: none;
+    border: 1px solid rgba(255,255,255,.1);
+    color: var(--gray);
+    padding: .5rem 1.2rem;
+    border-radius: 8px;
+    font-size: .8rem;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.admin-close:hover {
+    border-color: var(--cyan);
+    color: var(--white);
+}
+
+/* LOGIN SCREEN */
+.admin-login {
+    max-width: 400px;
+    margin: 8vh auto;
+    padding: 3rem;
+    background: linear-gradient(135deg, #0d1a2f, #132240);
+    border: 1px solid rgba(0, 136, 255, .18);
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, .5);
+}
+
+.admin-login h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+}
+
+.admin-login input {
+    width: 100%;
+    padding: .85rem 1rem;
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: 10px;
+    font-size: .92rem;
+    background: var(--navy2);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 1rem;
+}
+
+.admin-login input:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, .1);
+}
+
+.admin-login input::placeholder {
+    color: #334155;
+}
+
+.admin-login-btn {
+    width: 100%;
+    padding: .9rem;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: var(--navy);
+    border: none;
+    border-radius: 10px;
+    font-size: .95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.admin-login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 136, 255, .3);
+}
+
+/* ADMIN DASHBOARD */
+.admin-body {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.admin-stat {
+    background: linear-gradient(135deg, #0d1a2f, #132240);
+    border: 1px solid rgba(0, 136, 255, .12);
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+    text-align: center;
+}
+
+.admin-stat .stat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--white);
+    letter-spacing: 1px;
+}
+
+.admin-stat .stat-lbl {
+    font-size: .7rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: .2rem;
+}
+
+.admin-stat.s-new .stat-val { color: var(--cyan); }
+.admin-stat.s-contacted .stat-val { color: #8b5cf6; }
+.admin-stat.s-quoted .stat-val { color: var(--gold); }
+.admin-stat.s-booked .stat-val { color: var(--green); }
+.admin-stat.s-total .stat-val { color: var(--white); }
+
+/* TABLE TOOLBAR */
+.admin-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.admin-toolbar h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    color: var(--white);
+}
+
+.admin-filters {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: .45rem 1rem;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 8px;
+    background: none;
+    color: var(--gray);
+    font-size: .75rem;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    border-color: var(--cyan);
+    color: var(--white);
+    background: rgba(0, 212, 255, .06);
+}
+
+.admin-search {
+    padding: .5rem 1rem;
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 8px;
+    background: var(--navy2);
+    color: var(--white);
+    font-size: .82rem;
+    font-family: 'Inter', sans-serif;
+    width: 220px;
+}
+
+.admin-search:focus {
+    outline: none;
+    border-color: var(--cyan);
+}
+
+.admin-search::placeholder {
+    color: #334155;
+}
+
+/* TABLE */
+.leads-table-wrap {
+    background: linear-gradient(135deg, #0d1a2f, #132240);
+    border: 1px solid rgba(0, 136, 255, .12);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.leads-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .82rem;
+}
+
+.leads-table th {
+    background: rgba(0, 0, 0, .3);
+    padding: .9rem 1rem;
+    text-align: left;
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray);
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255,255,255,.04);
+}
+
+.leads-table td {
+    padding: .8rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,.03);
+    color: #cbd5e1;
+    vertical-align: middle;
+}
+
+.leads-table tr:hover td {
+    background: rgba(0, 136, 255, .03);
+}
+
+.leads-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* STATUS BADGES */
+.status-badge {
+    display: inline-block;
+    padding: .25rem .7rem;
+    border-radius: 20px;
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.status-badge.st-new {
+    background: rgba(0, 212, 255, .12);
+    color: var(--cyan);
+    border: 1px solid rgba(0, 212, 255, .25);
+}
+
+.status-badge.st-contacted {
+    background: rgba(139, 92, 246, .12);
+    color: #a78bfa;
+    border: 1px solid rgba(139, 92, 246, .25);
+}
+
+.status-badge.st-quoted {
+    background: rgba(251, 191, 36, .12);
+    color: var(--gold);
+    border: 1px solid rgba(251, 191, 36, .25);
+}
+
+.status-badge.st-booked {
+    background: rgba(34, 197, 94, .12);
+    color: var(--green);
+    border: 1px solid rgba(34, 197, 94, .25);
+}
+
+.status-badge.st-completed {
+    background: rgba(100, 116, 139, .12);
+    color: #94a3b8;
+    border: 1px solid rgba(100, 116, 139, .25);
+}
+
+.status-badge.st-lost {
+    background: rgba(239, 68, 68, .12);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, .25);
+}
+
+/* ACTION BUTTONS */
+.lead-actions {
+    display: flex;
+    gap: .4rem;
+}
+
+.lead-act {
+    padding: .3rem .6rem;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 6px;
+    background: none;
+    color: var(--gray);
+    font-size: .68rem;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.lead-act:hover {
+    border-color: var(--cyan);
+    color: var(--white);
+}
+
+.lead-act.del:hover {
+    border-color: #ef4444;
+    color: #f87171;
+}
+
+/* INLINE STATUS DROPDOWN */
+.status-select {
+    padding: .25rem .4rem;
+    border-radius: 8px;
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: var(--navy2);
+    color: var(--white);
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+}
+.status-select:focus { outline: none; border-color: var(--cyan); }
+.status-select option { background: var(--navy); }
+
+/* PROFILE MODAL */
+#profileModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    background: rgba(0,0,0,.75);
+    overflow-y: auto;
+}
+#profileModal.active { display: block; }
+
+.profile-panel {
+    max-width: 800px;
+    margin: 2vh auto;
+    background: linear-gradient(135deg, #0d1a2f, #132240);
+    border: 1px solid rgba(0, 136, 255, .2);
+    border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+    overflow: hidden;
+}
+
+.profile-header {
+    padding: 2rem 2.5rem;
+    border-bottom: 1px solid rgba(255,255,255,.04);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.profile-header-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: .3rem;
+}
+
+.profile-header-info .profile-meta {
+    font-size: .8rem;
+    color: var(--gray);
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.profile-header-info .profile-meta span {
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+}
+
+.profile-close {
+    background: none;
+    border: 1px solid rgba(255,255,255,.1);
+    color: var(--gray);
+    padding: .4rem .9rem;
+    border-radius: 8px;
+    font-size: .75rem;
+    cursor: pointer;
+    transition: all .2s;
+    flex-shrink: 0;
+}
+.profile-close:hover { border-color: var(--cyan); color: var(--white); }
+
+.profile-body {
+    padding: 2rem 2.5rem;
+}
+
+/* PROFILE TABS */
+.profile-tabs {
+    display: flex;
+    gap: .3rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,.04);
+    padding-bottom: 0;
+}
+
+.profile-tab {
+    padding: .6rem 1.2rem;
+    border: none;
+    background: none;
+    color: var(--gray);
+    font-size: .78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    font-family: 'Inter', sans-serif;
+}
+
+.profile-tab:hover { color: var(--white); }
+.profile-tab.active {
+    color: var(--cyan);
+    border-bottom-color: var(--cyan);
+}
+
+.profile-tab-content { display: none; }
+.profile-tab-content.active { display: block; }
+
+/* DETAILS TAB */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.profile-field {
+    margin-bottom: .8rem;
+}
+
+.profile-field label {
+    display: block;
+    margin-bottom: .3rem;
+    font-size: .68rem;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.profile-field input,
+.profile-field select,
+.profile-field textarea {
+    width: 100%;
+    padding: .65rem .8rem;
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: 8px;
+    font-size: .82rem;
+    background: var(--navy2);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+}
+
+.profile-field input:focus,
+.profile-field select:focus,
+.profile-field textarea:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, .1);
+}
+
+.profile-field select option { background: var(--navy); }
+
+.profile-field textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+.profile-field.full {
+    grid-column: 1 / -1;
+}
+
+.profile-save-row {
+    display: flex;
+    gap: .8rem;
+    margin-top: 1rem;
+    grid-column: 1 / -1;
+}
+
+.btn-save {
+    padding: .7rem 2rem;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: var(--navy);
+    border: none;
+    border-radius: 8px;
+    font-size: .82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .2s;
+}
+.btn-save:hover { transform: translateY(-1px); }
+
+/* PHOTOS TAB */
+.photos-section {
+    margin-bottom: 2rem;
+}
+
+.photos-section h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 1.5px;
+    color: var(--white);
+    margin-bottom: .8rem;
+}
+
+.photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: .8rem;
+}
+
+.photo-thumb {
+    aspect-ratio: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.06);
+    position: relative;
+    background: var(--navy2);
+}
+
+.photo-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-thumb .photo-remove {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.7);
+    border: 1px solid rgba(255,255,255,.15);
+    color: #f87171;
+    font-size: .65rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity .2s;
+}
+.photo-thumb:hover .photo-remove { opacity: 1; }
+
+.photo-add {
+    aspect-ratio: 1;
+    border-radius: 10px;
+    border: 2px dashed rgba(0, 212, 255, .2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .2s;
+    background: rgba(0, 212, 255, .02);
+    color: var(--gray);
+    font-size: .7rem;
+}
+.photo-add:hover {
+    border-color: var(--cyan);
+    background: rgba(0, 212, 255, .05);
+}
+.photo-add svg {
+    width: 24px;
+    height: 24px;
+    margin-bottom: .3rem;
+    opacity: .4;
+}
+
+/* TRANSACTIONS TAB */
+.txn-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .8rem;
+    margin-bottom: 1rem;
+}
+
+.txn-table th {
+    background: rgba(0,0,0,.2);
+    padding: .7rem .8rem;
+    text-align: left;
+    font-size: .68rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray);
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255,255,255,.04);
+}
+
+.txn-table td {
+    padding: .7rem .8rem;
+    border-bottom: 1px solid rgba(255,255,255,.03);
+    color: #cbd5e1;
+}
+
+.txn-table tr:last-child td { border-bottom: none; }
+
+.txn-paid {
+    color: var(--green);
+    font-weight: 600;
+}
+
+.txn-unpaid {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+.btn-add-txn {
+    padding: .5rem 1.2rem;
+    border: 1px solid rgba(0, 212, 255, .2);
+    border-radius: 8px;
+    background: none;
+    color: var(--cyan);
+    font-size: .75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+}
+.btn-add-txn:hover {
+    background: rgba(0, 212, 255, .06);
+    border-color: var(--cyan);
+}
+
+.no-txn {
+    text-align: center;
+    padding: 2rem;
+    color: #334155;
+    font-size: .82rem;
+}
+
+/* ADD TRANSACTION FORM */
+.txn-form {
+    display: none;
+    background: rgba(0,0,0,.15);
+    border: 1px solid rgba(255,255,255,.04);
+    border-radius: 10px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+}
+.txn-form.active { display: block; }
+
+.txn-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .8rem;
+}
+
+.txn-form-grid .profile-field { margin-bottom: 0; }
+
+/* INVOICE TAB */
+.invoice-preview {
+    background: #ffffff;
+    color: #1a1a2e;
+    border-radius: 12px;
+    padding: 2.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+}
+
+.invoice-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.invoice-brand h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    color: #0a1225;
+    margin-bottom: .2rem;
+}
+
+.invoice-brand p {
+    font-size: .75rem;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.invoice-label {
+    text-align: right;
+}
+
+.invoice-label h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    color: #0088ff;
+}
+
+.invoice-label p {
+    font-size: .75rem;
+    color: #64748b;
+}
+
+.invoice-parties {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.invoice-parties h4 {
+    font-size: .65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #94a3b8;
+    margin-bottom: .4rem;
+    font-weight: 700;
+}
+
+.invoice-parties p {
+    font-size: .82rem;
+    color: #334155;
+    line-height: 1.6;
+}
+
+.invoice-items {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    font-size: .82rem;
+}
+
+.invoice-items th {
+    background: #f1f5f9;
+    padding: .6rem .8rem;
+    text-align: left;
+    font-size: .65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #64748b;
+    font-weight: 700;
+}
+
+.invoice-items th:last-child { text-align: right; }
+
+.invoice-items td {
+    padding: .6rem .8rem;
+    border-bottom: 1px solid #e2e8f0;
+    color: #334155;
+}
+
+.invoice-items td:last-child { text-align: right; font-weight: 600; }
+
+.invoice-total {
+    text-align: right;
+    margin-bottom: 2rem;
+}
+
+.invoice-total-line {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+    padding: .3rem 0;
+    font-size: .82rem;
+    color: #64748b;
+}
+
+.invoice-total-line.grand {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0a1225;
+    border-top: 2px solid #e2e8f0;
+    padding-top: .8rem;
+    margin-top: .5rem;
+}
+
+.invoice-footer {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+    font-size: .72rem;
+    color: #94a3b8;
+}
+
+/* INVOICE FORM FIELDS (dark theme) */
+.inv-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .8rem;
+    margin-bottom: 1.5rem;
+}
+
+.inv-line-items {
+    margin-bottom: 1rem;
+}
+
+.inv-line-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: .5rem;
+    margin-bottom: .5rem;
+    align-items: center;
+}
+
+.inv-line-row input {
+    width: 100%;
+    padding: .55rem .7rem;
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 6px;
+    font-size: .8rem;
+    background: var(--navy2);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+}
+.inv-line-row input:focus { outline: none; border-color: var(--cyan); }
+
+.inv-remove-line {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,.08);
+    background: none;
+    color: #f87171;
+    font-size: .75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.inv-remove-line:hover { border-color: #ef4444; }
+
+.btn-add-line {
+    padding: .4rem 1rem;
+    border: 1px dashed rgba(0, 212, 255, .2);
+    border-radius: 6px;
+    background: none;
+    color: var(--gray);
+    font-size: .72rem;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+}
+.btn-add-line:hover { border-color: var(--cyan); color: var(--cyan); }
+
+.inv-actions {
+    display: flex;
+    gap: .8rem;
+    margin-top: 1.5rem;
+}
+
+.btn-preview-inv {
+    padding: .7rem 1.5rem;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: var(--navy);
+    border: none;
+    border-radius: 8px;
+    font-size: .82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .2s;
+}
+.btn-preview-inv:hover { transform: translateY(-1px); }
+
+.btn-print-inv {
+    padding: .7rem 1.5rem;
+    border: 1px solid rgba(255,255,255,.1);
+    background: none;
+    color: var(--gray);
+    border-radius: 8px;
+    font-size: .82rem;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+}
+.btn-print-inv:hover { border-color: var(--cyan); color: var(--white); }
+
+/* EDIT MODAL (kept for quick edits) */
+#editModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    background: rgba(0,0,0,.7);
+    align-items: center;
+    justify-content: center;
+}
+
+#editModal.active {
+    display: flex;
+}
+
+.modal-box {
+    background: linear-gradient(135deg, #0d1a2f, #132240);
+    border: 1px solid rgba(0, 136, 255, .2);
+    border-radius: 18px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 550px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+
+.modal-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+}
+
+.modal-field {
+    margin-bottom: 1rem;
+}
+
+.modal-field label {
+    display: block;
+    margin-bottom: .3rem;
+    font-size: .72rem;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.modal-field input,
+.modal-field select,
+.modal-field textarea {
+    width: 100%;
+    padding: .7rem .9rem;
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: 8px;
+    font-size: .85rem;
+    background: var(--navy2);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+}
+
+.modal-field input:focus,
+.modal-field select:focus,
+.modal-field textarea:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, .1);
+}
+
+.modal-field select option {
+    background: var(--navy);
+}
+
+.modal-field textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.modal-btns {
+    display: flex;
+    gap: .8rem;
+    margin-top: 1.5rem;
+}
+
+.modal-save {
+    flex: 1;
+    padding: .8rem;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: var(--navy);
+    border: none;
+    border-radius: 8px;
+    font-size: .85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.modal-save:hover {
+    transform: translateY(-1px);
+}
+
+.modal-cancel {
+    flex: 1;
+    padding: .8rem;
+    background: none;
+    border: 1px solid rgba(255,255,255,.1);
+    color: var(--gray);
+    border-radius: 8px;
+    font-size: .85rem;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.modal-cancel:hover {
+    border-color: var(--cyan);
+    color: var(--white);
+}
+
+@media (max-width: 768px) {
+    .profile-panel { margin: 0; border-radius: 0; min-height: 100vh; }
+    .profile-header { padding: 1.5rem; flex-direction: column; }
+    .profile-body { padding: 1.5rem; }
+    .profile-grid { grid-template-columns: 1fr; }
+    .invoice-preview { padding: 1.5rem; }
+    .invoice-parties { grid-template-columns: 1fr; gap: 1rem; }
+    .inv-fields { grid-template-columns: 1fr; }
+    .inv-line-row { grid-template-columns: 1fr 1fr; }
+}
+
+.no-leads {
+    text-align: center;
+    padding: 3rem;
+    color: #334155;
+    font-size: .9rem;
+}
+
+/* ADMIN RESPONSIVE */
+@media (max-width: 1024px) {
+    .admin-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .leads-table-wrap {
+        overflow-x: auto;
+    }
+    .leads-table {
+        min-width: 800px;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .admin-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .admin-search {
+        width: 100%;
+    }
+    .admin-body {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+    .admin-topbar {
+        padding: .8rem 1rem;
+    }
+}
+
+/* CALENDAR */
+.cal-section {
+    margin-bottom: 2rem;
+}
+
+.cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.cal-header h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    color: var(--white);
+}
+
+.cal-nav {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+
+.cal-nav-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,.08);
+    background: none;
+    color: var(--gray);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s;
+}
+
+.cal-nav-btn:hover {
+    border-color: var(--cyan);
+    color: var(--white);
+}
+
+.cal-month {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 1.5px;
+    color: var(--white);
+    min-width: 160px;
+    text-align: center;
+}
+
+.cal-today-btn {
+    padding: .35rem .9rem;
+    border: 1px solid rgba(0, 212, 255, .2);
+    border-radius: 8px;
+    background: none;
+    color: var(--cyan);
+    font-size: .7rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.cal-today-btn:hover {
+    background: rgba(0, 212, 255, .06);
+    border-color: var(--cyan);
+}
+
+.cal-grid {
+    background: linear-gradient(135deg, #0d1a2f, #132240);
+    border: 1px solid rgba(0, 136, 255, .12);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: rgba(0,0,0,.3);
+    border-bottom: 1px solid rgba(255,255,255,.04);
+}
+
+.cal-weekday {
+    padding: .6rem;
+    text-align: center;
+    font-size: .65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray);
+}
+
+.cal-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.cal-day {
+    min-height: 90px;
+    padding: .4rem;
+    border-right: 1px solid rgba(255,255,255,.02);
+    border-bottom: 1px solid rgba(255,255,255,.02);
+    position: relative;
+}
+
+.cal-day:nth-child(7n) {
+    border-right: none;
+}
+
+.cal-day-num {
+    font-size: .72rem;
+    color: #475569;
+    font-weight: 600;
+    margin-bottom: .3rem;
+}
+
+.cal-day.current-month .cal-day-num {
+    color: var(--gray);
+}
+
+.cal-day.today .cal-day-num {
+    color: var(--cyan);
+    font-weight: 800;
+}
+
+.cal-day.today {
+    background: rgba(0, 212, 255, .04);
+}
+
+.cal-job {
+    display: block;
+    padding: .2rem .4rem;
+    margin-bottom: .2rem;
+    border-radius: 4px;
+    font-size: .62rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cal-job:hover {
+    transform: scale(1.03);
+    box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+
+.cal-job.job-booked {
+    background: rgba(34, 197, 94, .15);
+    color: var(--green);
+    border-left: 2px solid var(--green);
+}
+
+.cal-job.job-completed {
+    background: rgba(100, 116, 139, .12);
+    color: #94a3b8;
+    border-left: 2px solid #64748b;
+}
+
+.cal-job.job-quoted {
+    background: rgba(251, 191, 36, .12);
+    color: var(--gold);
+    border-left: 2px solid var(--gold);
+}
+
+.cal-job.job-new {
+    background: rgba(0, 212, 255, .1);
+    color: var(--cyan);
+    border-left: 2px solid var(--cyan);
+}
+
+.cal-job.job-contacted {
+    background: rgba(139, 92, 246, .1);
+    color: #a78bfa;
+    border-left: 2px solid #8b5cf6;
+}
+
+/* JOB POPUP */
+#calPopup {
+    display: none;
+    position: fixed;
+    z-index: 10002;
+    background: linear-gradient(135deg, #0d1a2f, #162242);
+    border: 1px solid rgba(0, 136, 255, .25);
+    border-radius: 14px;
+    padding: 1.5rem;
+    width: 320px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.6), 0 0 20px rgba(0, 136, 255, .08);
+}
+
+#calPopup.active {
+    display: block;
+}
+
+.popup-close {
+    position: absolute;
+    top: .8rem;
+    right: .8rem;
+    background: none;
+    border: none;
+    color: var(--gray);
+    font-size: .85rem;
+    cursor: pointer;
+}
+
+.popup-close:hover {
+    color: var(--white);
+}
+
+.popup-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 1.5px;
+    color: var(--white);
+    margin-bottom: .8rem;
+}
+
+.popup-row {
+    display: flex;
+    gap: .6rem;
+    margin-bottom: .5rem;
+    font-size: .78rem;
+    align-items: flex-start;
+}
+
+.popup-label {
+    color: #475569;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: .62rem;
+    letter-spacing: .5px;
+    min-width: 60px;
+    padding-top: .1rem;
+}
+
+.popup-val {
+    color: #cbd5e1;
+    flex: 1;
+}
+
+.popup-actions {
+    display: flex;
+    gap: .5rem;
+    margin-top: 1rem;
+    padding-top: .8rem;
+    border-top: 1px solid rgba(255,255,255,.04);
+}
+
+.popup-btn {
+    flex: 1;
+    padding: .5rem;
+    border-radius: 8px;
+    font-size: .72rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.popup-btn-primary {
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    color: var(--navy);
+    border: none;
+}
+
+.popup-btn-primary:hover {
+    transform: translateY(-1px);
+}
+
+.popup-btn-secondary {
+    background: none;
+    border: 1px solid rgba(255,255,255,.1);
+    color: var(--gray);
+}
+
+.popup-btn-secondary:hover {
+    border-color: var(--cyan);
+    color: var(--white);
+}
+
+.cal-more {
+    font-size: .58rem;
+    color: var(--cyan);
+    cursor: pointer;
+    padding: .1rem .3rem;
+    font-weight: 600;
+}
+
+.cal-more:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .cal-day {
+        min-height: 60px;
+    }
+    .cal-job {
+        font-size: .55rem;
+        padding: .15rem .3rem;
+    }
+    .cal-header {
+        flex-wrap: wrap;
+        gap: .5rem;
+    }
+    #calPopup {
+        width: 280px;
+    }
+}
+
+</style></head><body><!-- SPLASH --><div id="splash"><div class="splash-center"><div class="splash-pulse" id="splashPulse"></div><img class="splash-crown" id="splashCrown" src="Company Logo.png" alt="AZ Concrete King"><div class="splash-title" id="splashTitle" data-text="THE DIRT ELIMINATORS">THE DIRT <span class="az">ELIMINATORS</span></div><div class="splash-loader" id="splashLoader"><div class="splash-percent" id="splashPercent">0%</div><div class="splash-bar"><div class="splash-fill" id="splashFill"></div></div></div></div></div><!-- NAV --><nav id="mainNav"><div class="nav-inner"><div class="nav-logo"><img src="Company Logo.png" alt="AZ Concrete King"></div><ul class="nav-links" id="navLinks"><li><a href="#services">Services</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#results">Results</a></li><li><a href="#about">About</a></li><li><a href="#faq">FAQ</a></li><li><a href="#quote" class="nav-cta">Free Quote</a></li></ul><button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></button></div></nav><!-- HERO --><section class="hero"><div class="hero-bg"></div><div class="hero-grid"></div><div class="hero-particles" id="heroP"></div><div class="hero-orb o1"></div><div class="hero-orb o2"></div><div class="hero-orb o3"></div><div class="hero-content"><img class="hero-crown" src="Company Logo.png" alt="AZ Concrete King"><div class="hero-badge"><span class="dot"></span>Anthem & Vistancia's #1 Pressure Washer</div>
+ <h1>WE BLAST DIRT<br><span class="glow">YOU GET RESULTS</span></h1><p class="hero-sub"><strong>Professional pressure washing</strong> with industrial-grade equipment. Driveways,
+patios,
+pool decks & more &mdash;
+at prices the big companies can't touch.</p>
+ <div class="hero-buttons"><a href="#quote" class="btn btn-power">Get a Free Quote</a><a href="#pricing" class="btn btn-dark">View Pricing</a></div></div><div class="scroll-ind"><div class="scroll-mouse"></div>Scroll</div></section><!-- TRUST STRIP --><div class="trust-strip"><div class="trust-scroll"><div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#0088ff" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg>5-Star Rated<span class="trust-sep"></span></div><div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#0088ff" stroke-width="2.5"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>Same-Week Service<span class="trust-sep"></span></div><div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#0088ff" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" /></svg>Lowest Prices<span class="trust-sep"></span></div><div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#0088ff" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>100% Guarantee<span class="trust-sep"></span></div><div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#0088ff" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>Pro Equipment<span class="trust-sep"></span></div><div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#0088ff" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" /></svg>Locally Owned<span class="trust-sep"></span></div><div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#0088ff" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg>5-Star Rated<span class="trust-sep"></span></div><div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#0088ff" stroke-width="2.5"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>Same-Week Service<span class="trust-sep"></span></div><div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#0088ff" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" /></svg>Lowest Prices<span class="trust-sep"></span></div><div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#0088ff" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>100% Guarantee<span class="trust-sep"></span></div><div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#0088ff" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>Pro Equipment<span class="trust-sep"></span></div><div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="#0088ff" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" /></svg>Locally Owned<span class="trust-sep"></span></div></div></div><!-- REVIEWS --><section id="reviews"><div class="sec-glow"></div><div class="container"><div class="sec-head rv"><div class="sec-label"><span class="dot"></span><span>Reviews</span></div><h2>WHAT CUSTOMERS SAY</h2></div><div class="rev-grid"><div class="rev-card rv d1"><span class="rev-quote">&ldquo;</span><div class="rev-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg></div><p>"Brycen did an incredible job on our driveway. It looks brand new! Way cheaper than other quotes. Highly recommend!"</p><div class="rev-author"><div class="rev-av">HH</div><div><div class="rev-name">Happy Homeowner</div><div class="rev-loc">Anthem, AZ</div></div></div></div><div class="rev-card rv d2"><span class="rev-quote">&ldquo;</span><div class="rev-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg></div><p>"Our pool deck had years of buildup and Brycen made it sparkle. On time, polite, amazing results!"</p><div class="rev-author"><div class="rev-av">SC</div><div><div class="rev-name">Satisfied Customer</div><div class="rev-loc">Vistancia, AZ</div></div></div></div><div class="rev-card rv d3"><span class="rev-quote">&ldquo;</span><div class="rev-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg></div><p>"Love supporting young entrepreneurs. Brycen's work ethic is outstanding. Five stars all day."</p><div class="rev-author"><div class="rev-av">RC</div><div><div class="rev-name">Repeat Customer</div><div class="rev-loc">Anthem, AZ</div></div></div></div></div></div></section><!-- SERVICES --><section id="services"><div class="sec-glow"></div><div class="container"><div class="sec-head rv"><div class="sec-label"><span class="dot"></span><span>What We Do</span></div><h2>PRESSURE WASHING SERVICES</h2><p>We bring the pressure to make every surface showroom-clean.</p></div><div class="svc-grid"><div class="svc-card rv d1"><span class="svc-num">01</span><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16" /><path d="M6 16h12" /><path d="M8 12h8" /><path d="M10 8h4" /><path d="M12 4v0" /></svg></div><h3>Driveway Cleaning</h3><p>Remove oil stains,
+tire marks,
+and grime from concrete and pavers.</p></div><div class="svc-card rv d2"><span class="svc-num">02</span><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0" /><path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0" /><circle cx="8" cy="5" r="2" /><path d="M14 4l2 4h-4l2-4" /></svg></div><h3>Patio & Pool Deck</h3><p>Blast away Arizona dust,
+algae,
+and buildup from outdoor spaces.</p></div><div class="svc-card rv d3"><span class="svc-num">03</span><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></div><h3>House Exterior</h3><p>Gentle soft-washing for stucco,
+siding,
+and painted surfaces.</p></div><div class="svc-card rv d4"><span class="svc-num">04</span><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19l4-14" /><path d="M16 19l4-14" /><line x1="6" y1="12" x2="18" y2="12" /><line x1="5" y1="16" x2="19" y2="16" /><line x1="7" y1="8" x2="17" y2="8" /></svg></div><h3>Walkways</h3><p>Restore curb appeal by cleaning slippery or discolored paths.</p></div><div class="svc-card rv d5"><span class="svc-num">05</span><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13" /><rect x="8" y="13" width="8" height="8" /><line x1="8" y1="17" x2="16" y2="17" /></svg></div><h3>Garage Floor</h3><p>Deep clean to remove oil,
+grease,
+and stains.</p></div><div class="svc-card rv d6"><span class="svc-num">06</span><div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6" /><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /></svg></div><h3>Trash Can Clean</h3><p>Eliminate odor and bacteria. Affordable add-on.</p></div></div></div></section><!-- BEFORE/AFTER --><section id="results"><div class="sec-glow"></div><div class="container"><div class="sec-head rv"><div class="sec-label"><span class="dot"></span><span>See The Difference</span></div><h2>BEFORE & AFTER</h2><p>Drag the slider to see real transformations.</p></div><div class="ba-grid"><div class="ba-card rv d1" onmousemove="baS(event,this)" ontouchmove="baT(event,this)"><div class="ba-before" style="background-image:url('before-driveway.jpg')"></div><div class="ba-after" style="background-image:url('after-driveway.jpg')"></div><div class="ba-div"><svg viewBox="0 0 24 24"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6" /></svg></div><span class="ba-tag-b">Before</span><span class="ba-tag-a">After</span><span class="ba-caption">Driveway &mdash;
+Anthem</span></div><div class="ba-card rv d2" onmousemove="baS(event,this)" ontouchmove="baT(event,this)"><div class="ba-before" style="background-image:url('before-patio.jpg')"></div><div class="ba-after" style="background-image:url('after-patio.jpg')"></div><div class="ba-div"><svg viewBox="0 0 24 24"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6" /></svg></div><span class="ba-tag-b">Before</span><span class="ba-tag-a">After</span><span class="ba-caption">Pool Deck &mdash;
+Vistancia</span></div><div class="ba-card rv d3" onmousemove="baS(event,this)" ontouchmove="baT(event,this)"><div class="ba-before" style="background-image:url('before-garage.jpg')"></div><div class="ba-after" style="background-image:url('after-garage.jpg')"></div><div class="ba-div"><svg viewBox="0 0 24 24"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6" /></svg></div><span class="ba-tag-b">Before</span><span class="ba-tag-a">After</span><span class="ba-caption">Garage &mdash;
+Anthem</span></div></div></div></section><!-- PRICING --><section id="pricing"><div class="sec-glow"></div><div class="container"><div class="sec-head rv"><div class="sec-label"><span class="dot"></span><span>Transparent Pricing</span></div><h2>PRICES THAT CRUSH THE COMPETITION</h2><p>No hidden fees. Honest pricing for Anthem & Vistancia.</p></div><div class="price-badge rv"><div class="price-badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><polyline points="9 12 11 14 15 10" /></svg></div><h4>PRICE MATCH GUARANTEE</h4><div class="price-badge-lines"><span>Crossed-out prices are <strong>real competitor rates</strong> from Phoenix-area companies.</span><span>Got a cheaper quote? Show us and we'll beat it.</span></div></div><div class="price-grid"><div class="pcard rv d1"><div class="pcard-head"><h3>DRIVEWAY CLEANING</h3><div class="sub">#1 most requested service</div></div><div class="pcard-body"><div class="pline"><span class="lbl">1-Car (to 300sqft)</span><span class="val"><span class="old">$130</span>$90</span></div><div class="pline"><span class="lbl">2-Car (300-600sqft)</span><span class="val"><span class="old">$200</span>$140</span></div><div class="pline"><span class="lbl">3-Car (600-900sqft)</span><span class="val"><span class="old">$275</span>$190</span></div><div class="pline"><span class="lbl">900+ sqft</span><span class="val"><span class="old">$0.30</span>$0.20/sqft</span></div></div><div class="pcard-foot"><a href="#quote">Get This Quote &rarr;</a></div></div><div class="pcard pop rv d2"><span class="pop-tag">Most Popular</span><div class="pcard-head"><h3>PATIO & POOL DECK</h3><div class="sub">Bring your backyard back to life</div></div><div class="pcard-body"><div class="pline"><span class="lbl">Small (to 200sqft)</span><span class="val"><span class="old">$100</span>$70</span></div><div class="pline"><span class="lbl">Medium (200-500sqft)</span><span class="val"><span class="old">$200</span>$135</span></div><div class="pline"><span class="lbl">Large (500-800sqft)</span><span class="val"><span class="old">$325</span>$225</span></div><div class="pline"><span class="lbl">800+ sqft</span><span class="val"><span class="old">$0.35</span>$0.25/sqft</span></div></div><div class="pcard-foot"><a href="#quote">Get This Quote &rarr;</a></div></div><div class="pcard rv d3"><div class="pcard-head"><h3>BUNDLE PACKAGES</h3><div class="sub">Combine & save big</div></div><div class="pcard-body"><div class="pline"><span class="lbl">Driveway + Patio</span><span class="val"><span class="old">$330</span>$210 <span class="save">Save 36%</span></span></div><div class="pline"><span class="lbl">Driveway + Walkways</span><span class="val"><span class="old">$280</span>$175 <span class="save">Save 37%</span></span></div><div class="pline"><span class="lbl">Whole Property</span><span class="val"><span class="old">$550</span>$375 <span class="save">Best Deal</span></span></div><div class="pline"><span class="lbl">House Exterior</span><span class="val"><span class="old">$300</span>from $200</span></div></div><div class="pcard-foot"><a href="#quote">Get This Quote &rarr;</a></div></div></div><div class="addons rv"><div class="addons-head"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg><h4>ADD-ON SERVICES</h4></div><div class="addons-body"><div class="pline"><span class="lbl">Walkway / Sidewalk</span><span class="val"><span class="old">$75</span>from $50</span></div><div class="pline"><span class="lbl">Garage Floor Deep Clean</span><span class="val"><span class="old">$150</span>from $100</span></div><div class="pline"><span class="lbl">Trash Can Sanitize</span><span class="val"><span class="old">$20</span>$12/each</span></div><div class="pline"><span class="lbl">Stain Pre-Treatment</span><span class="val"><span class="old">$30</span>$20</span></div></div></div></div></section><!-- WHY --><section id="why"><div class="sec-glow"></div><div class="container"><div class="sec-head rv"><div class="sec-label"><span class="dot"></span><span>The Difference</span></div><h2>WHY HOMEOWNERS CHOOSE US</h2></div><div class="why-grid"><div class="why-card rv d1"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" /></svg></div><h3>Unbeatable Prices</h3><p>We'll beat any written estimate in the area.</p></div>
+ <div class="why-card rv d2"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg></div><h3>Always On Time</h3><p>No ghosting,
+no excuses. Your time matters.</p></div><div class="why-card rv d3"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26" /></svg></div><h3>Pro-Grade Results</h3><p>Professional equipment,
+every single time.</p></div><div class="why-card rv d4"><div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg></div><h3>100% Guarantee</h3><p>Not happy? I'll redo it free. No questions.</p></div>
+ </div></div></section><!-- QUOTE --><section id="quote"><div class="quote-lines"></div><div class="container"><div class="sec-head rv"><div class="sec-label"><span class="dot"></span><span>Get Started</span></div><h2>REQUEST A FREE QUOTE</h2><p>Fill out the form and I'll respond within 24 hours.</p></div>
+ <div class="quote-wrap rv"><form id="quoteForm" onsubmit="handleSubmit(event)"><div class="fgrid"><div class="fgroup"><label>First Name *</label><input type="text" placeholder="John" required></div><div class="fgroup"><label>Last Name *</label><input type="text" placeholder="Smith" required></div><div class="fgroup"><label>Email *</label><input type="email" placeholder="john@example.com" required></div><div class="fgroup"><label>Phone *</label><input type="tel" placeholder="(480) 555-1234" required></div><div class="fgroup"><label>Address</label><input type="text" placeholder="123 Main St, Anthem, AZ"></div><div class="fgroup"><label>Neighborhood</label><select><option value="">Select area</option><option>Anthem</option><option>Vistancia</option><option>Other</option></select></div><div class="fgroup"><label>Service *</label><select required><option value="">Select service</option><option>Driveway</option><option>Patio / Pool Deck</option><option>Walkway</option><option>House Exterior</option><option>Garage Floor</option><option>Full Property Combo</option><option>Other</option></select></div><div class="fgroup"><label>Approx Sqft</label><input type="text" placeholder="e.g. 500"></div><div class="fgroup full"><label>Project Details</label><textarea placeholder="Describe stains, problem areas, preferred schedule..."></textarea></div><div class="photo-upload"><label>Upload a Photo (Optional)</label><div class="upload-area" onclick="document.getElementById('photoInput').click()"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><p><span>Click to upload</span> a photo of the area</p><small>JPG, PNG, or HEIC &bull; Max 10MB</small><input type="file" id="photoInput" accept="image/*" onchange="handlePhotoUpload(this)"></div><div class="upload-preview" id="uploadPreview"><span class="file-name" id="fileName"></span><span class="remove-file" onclick="removePhoto()">Remove</span></div></div></div><div class="form-btn"><button type="submit">Send My Free Quote</button></div><p class="form-note">No spam. No pressure. Just an honest quote.</p></form><div id="formSuccess"><div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12" /></svg></div><h3 style="color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:3px;">QUOTE REQUEST SENT!</h3><p style="color:var(--gray);margin-top:.5rem;">I'll get back to you within 24 hours.</p></div>
+ </div></div></section><!-- ABOUT --><section id="about"><div class="sec-glow"></div><div class="container"><div class="about-grid"><div class="about-visual rvl"><div class="about-card-main"><div class="pw-scene"><svg viewBox="0 0 400 300" fill="none"><rect x="260" y="160" width="20" height="50" rx="5" fill="rgba(255,255,255,.12)" /><rect x="250" y="145" width="40" height="25" rx="4" fill="rgba(255,255,255,.15)" /><rect x="100" y="165" width="160" height="8" rx="4" fill="rgba(255,255,255,.1)" /><rect x="85" y="160" width="20" height="18" rx="3" fill="rgba(255,255,255,.12)" /><path d="M85 169 L15 100 Q40 90 85 164" fill="rgba(0,212,255,.12)" /><path d="M85 169 L10 130 Q35 120 85 166" fill="rgba(0,136,255,.08)" /><path d="M85 169 L20 80 Q45 70 85 162" fill="rgba(0,212,255,.06)" /><circle cx="30" cy="95" r="4" fill="rgba(0,212,255,.3)"><animate attributeName="cy" values="95;85;95" dur="2s" repeatCount="indefinite" /></circle><circle cx="45" cy="75" r="3" fill="rgba(0,212,255,.25)"><animate attributeName="cy" values="75;65;75" dur="1.8s" repeatCount="indefinite" /></circle><circle cx="20" cy="115" r="3.5" fill="rgba(0,212,255,.2)"><animate attributeName="cy" values="115;105;115" dur="2.2s" repeatCount="indefinite" /></circle><rect x="15" y="200" width="60" height="3" rx="1.5" fill="rgba(0,212,255,.08)"><animate attributeName="width" values="0;60;0" dur="3s" repeatCount="indefinite" /></rect><rect x="20" y="215" width="50" height="3" rx="1.5" fill="rgba(0,212,255,.06)"><animate attributeName="width" values="0;50;0" dur="3.5s" repeatCount="indefinite" /></rect><path d="M290 195 Q310 210 320 240 Q325 260 310 270" stroke="rgba(255,255,255,.06)" stroke-width="6" fill="none" stroke-linecap="round" /><g transform="translate(150,20)"><path d="M0 40 L0 15 L15 25 L30 0 L45 25 L60 15 L60 40 Z" fill="rgba(251,191,36,.2)" stroke="rgba(251,191,36,.4)" stroke-width="1.5"><animateTransform attributeName="transform" type="translate" values="0,0;0,-5;0,0" dur="3s" repeatCount="indefinite" /></path></g></svg></div></div><div class="about-badge"><div class="about-badge-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg></div><div class="about-badge-text"><strong>Brycen Zeable</strong>Local + Reliable</div></div></div><div class="about-text rvr"><div class="sec-label"><span class="dot"></span><span>Our Story</span></div><h3>THE KING BEHIND THE CROWN</h3><p><strong>I'm Brycen Zeable</strong> &mdash; at just 12 years old, I started AZ Concrete King because I saw dirty driveways all over Anthem and Vistancia and knew I could make them look new.</p><p>What started as a neighborhood hustle has grown into a business homeowners trust. When I show up, you get someone who cares &mdash; not a big company that sees you as another number.</p><p>I use <strong>professional-grade equipment</strong> and treat every job like it's my own home.</p><div class="about-stats"><div class="astat"><div class="astat-val">100%</div><div class="astat-lbl">Satisfaction</div></div><div class="astat"><div class="astat-val">LOCAL</div><div class="astat-lbl">Owned & Run</div></div><div class="astat"><div class="astat-val">24HR</div><div class="astat-lbl">Response</div></div></div></div></div></div></section><!-- FAQ --><section id="faq"><div class="sec-glow"></div><div class="container"><div class="sec-head rv"><div class="sec-label"><span class="dot"></span><span>Questions</span></div><h2>FREQUENTLY ASKED</h2></div><div class="faq-list"><div class="faq-item rv"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What areas do you serve?<div class="faq-tog"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg></div></div><div class="faq-a">Anthem and Vistancia primarily. Nearby communities too &mdash;
+just ask!</div></div><div class="faq-item rv"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How long does a job take?<div class="faq-tog"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg></div></div><div class="faq-a">30 minutes to 1.5 hours depending on size and condition.</div></div><div class="faq-item rv"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is pressure washing safe for concrete?<div class="faq-tog"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg></div></div><div class="faq-a">Yes! We use proper pressure settings. Soft-wash for delicate surfaces.</div></div><div class="faq-item rv"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do I need to be home?<div class="faq-tog"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg></div></div><div class="faq-a">Nope! Just leave access to water. We send before/after photos when done.</div></div><div class="faq-item rv"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What if I'm not satisfied?<div class="faq-tog"><svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></div><div class="faq-a">100% guarantee. I'll redo it free &mdash;
+no questions asked.</div></div></div></div></section><!-- CTA --><div class="cta"><h2>READY FOR A CLEANER HOME?</h2><p>Get your free,
+no-pressure quote today.</p><a href="#quote" class="btn" style="margin-top:1rem;">Get Your Free Quote &rarr;
+</a></div><!-- FOOTER --><footer><div class="ft-inner"><div class="ft-brand"><div class="ft-logo"><img src="Company Logo.png" alt="AZ Concrete King"></div><p>Anthem & Vistancia's premier pressure washing. Owned by entrepreneur Brycen Zeable.</p></div>
+ <div class="ft-col"><h4>Navigation</h4><a href="#about">About</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#results">Results</a></div><div class="ft-col"><h4>Services</h4><a href="#pricing">Driveways</a><a href="#pricing">Patio & Pool Deck</a><a href="#pricing">House Exterior</a><a href="#pricing">Garage Floors</a></div><div class="ft-col"><h4>Contact</h4><a href="mailto:info@azconcreteking.com">info@azconcreteking.com</a><a href="#quote">Request a Quote</a><a>Anthem & Vistancia, AZ</a></div></div><div class="ft-bottom"><span>&copy; 2026 AZ Concrete King</span><span>Proudly local in Arizona</span><a href="#" class="admin-link" onclick="event.preventDefault();showAdmin()">Admin</a></div></footer><!-- ADMIN PANEL --><div id="adminOverlay"><div class="admin-topbar"><h2><span>AZ</span> CONCRETE KING &mdash; ADMIN</h2><button class="admin-close" onclick="closeAdmin()">&#10005; Close</button></div><div id="adminLogin" class="admin-login"><h3>ADMIN LOGIN</h3><input type="text" id="adminUser" placeholder="Username"><input type="password" id="adminPass" placeholder="Password"><button class="admin-login-btn" onclick="adminLogin()">Sign In</button></div><div id="adminDash" class="admin-body" style="display:none"><div class="admin-stats"><div class="admin-stat s-new"><div class="stat-val" id="statNew">0</div><div class="stat-lbl">New Leads</div></div><div class="admin-stat s-contacted"><div class="stat-val" id="statContacted">0</div><div class="stat-lbl">Contacted</div></div><div class="admin-stat s-quoted"><div class="stat-val" id="statQuoted">0</div><div class="stat-lbl">Quoted</div></div><div class="admin-stat s-booked"><div class="stat-val" id="statBooked">0</div><div class="stat-lbl">Booked</div></div><div class="admin-stat s-total"><div class="stat-val" id="statTotal">0</div><div class="stat-lbl">Total Leads</div></div></div><div class="cal-section"><div class="cal-header"><h3>JOB CALENDAR</h3><div class="cal-nav"><button class="cal-today-btn" onclick="calToday()">Today</button><button class="cal-nav-btn" onclick="calPrev()">&#8249;</button><span class="cal-month" id="calMonth"></span><button class="cal-nav-btn" onclick="calNext()">&#8250;</button></div></div><div class="cal-grid"><div class="cal-weekdays"><div class="cal-weekday">Sun</div><div class="cal-weekday">Mon</div><div class="cal-weekday">Tue</div><div class="cal-weekday">Wed</div><div class="cal-weekday">Thu</div><div class="cal-weekday">Fri</div><div class="cal-weekday">Sat</div></div><div class="cal-days" id="calDays"></div></div></div><div id="calPopup"><button class="popup-close" onclick="closeCalPopup()">&#10005;</button><div class="popup-name" id="popupName"></div><div class="popup-row"><span class="popup-label">Service</span><span class="popup-val" id="popupService"></span></div><div class="popup-row"><span class="popup-label">Status</span><span class="popup-val" id="popupStatus"></span></div><div class="popup-row"><span class="popup-label">Phone</span><span class="popup-val" id="popupPhone"></span></div><div class="popup-row"><span class="popup-label">Email</span><span class="popup-val" id="popupEmail"></span></div><div class="popup-row"><span class="popup-label">Address</span><span class="popup-val" id="popupAddress"></span></div><div class="popup-row"><span class="popup-label">Area</span><span class="popup-val" id="popupArea"></span></div><div class="popup-row"><span class="popup-label">Sqft</span><span class="popup-val" id="popupSqft"></span></div><div class="popup-row"><span class="popup-label">Notes</span><span class="popup-val" id="popupNotes"></span></div><div class="popup-actions"><button class="popup-btn popup-btn-primary" id="popupViewBtn">Open Profile</button><button class="popup-btn popup-btn-secondary" onclick="closeCalPopup()">Close</button></div></div><div class="admin-toolbar"><h3>LEAD PIPELINE</h3><div class="admin-filters"><button class="filter-btn active" onclick="filterLeads('all',this)">All</button><button class="filter-btn" onclick="filterLeads('New',this)">New</button><button class="filter-btn" onclick="filterLeads('Contacted',this)">Contacted</button><button class="filter-btn" onclick="filterLeads('Quoted',this)">Quoted</button><button class="filter-btn" onclick="filterLeads('Booked',this)">Booked</button><button class="filter-btn" onclick="filterLeads('Completed',this)">Completed</button><button class="filter-btn" onclick="filterLeads('Lost',this)">Lost</button></div><input type="text" class="admin-search" placeholder="Search leads..." oninput="searchLeads(this.value)"></div><div class="leads-table-wrap"><table class="leads-table"><thead><tr><th>Date</th><th>Name</th><th>Contact</th><th>Service</th><th>Area</th><th>Status</th><th>Notes</th><th>Actions</th></tr></thead><tbody id="leadsBody"></tbody></table></div></div></div><!-- PROFILE MODAL --><div id="profileModal"><div class="profile-panel"><div class="profile-header"><div class="profile-header-info"><h3 id="profileName">—</h3><div class="profile-meta"><span id="profileEmail">—</span><span id="profilePhone">—</span><span id="profileHood">—</span></div></div><button class="profile-close" onclick="closeProfile()">&#10005; Close</button></div><div class="profile-body"><div class="profile-tabs"><button class="profile-tab active" onclick="switchTab('details',this)">Details</button><button class="profile-tab" onclick="switchTab('photos',this)">Photos</button><button class="profile-tab" onclick="switchTab('transactions',this)">Transactions</button><button class="profile-tab" onclick="switchTab('invoice',this)">Send Invoice</button><button class="profile-tab" onclick="switchTab('quote',this)">Send Quote</button></div><!-- DETAILS TAB --><div class="profile-tab-content active" id="tab-details"><div class="profile-grid"><div class="profile-field"><label>First Name</label><input type="text" id="pFirstName"></div><div class="profile-field"><label>Last Name</label><input type="text" id="pLastName"></div><div class="profile-field"><label>Email</label><input type="email" id="pEmail"></div><div class="profile-field"><label>Phone</label><input type="tel" id="pPhone"></div><div class="profile-field"><label>Address</label><input type="text" id="pAddress"></div><div class="profile-field"><label>Neighborhood</label><input type="text" id="pNeighborhood"></div><div class="profile-field"><label>Service</label><input type="text" id="pService"></div><div class="profile-field"><label>Approx Sqft</label><input type="text" id="pSqft"></div><div class="profile-field"><label>Status</label><select id="pStatus"><option>New</option><option>Contacted</option><option>Quoted</option><option>Booked</option><option>Completed</option><option>Lost</option></select></div><div class="profile-field"><label>Job Date</label><input type="date" id="pJobDate"></div><div class="profile-field full"><label>Internal Notes</label><textarea id="pNotes" placeholder="Add internal notes..."></textarea></div><div class="profile-field full"><label>Customer's Project Details</label><textarea id="pDetails" readonly style="opacity:.6;cursor:default"></textarea></div><div class="profile-save-row"><button class="btn-save" onclick="saveProfile()">Save Changes</button></div></div></div><!-- PHOTOS TAB --><div class="profile-tab-content" id="tab-photos"><div class="photos-section"><h4>BEFORE PHOTOS</h4><div class="photos-grid" id="beforePhotos"><div class="photo-add" onclick="addPhoto('before')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Photo</div></div></div><div class="photos-section"><h4>AFTER PHOTOS</h4><div class="photos-grid" id="afterPhotos"><div class="photo-add" onclick="addPhoto('after')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Photo</div></div></div><input type="file" id="photoFileInput" accept="image/*" multiple style="display:none" onchange="handleProfilePhoto(this)"></div><!-- TRANSACTIONS TAB --><div class="profile-tab-content" id="tab-transactions"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem"><h4 style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1.5px;color:var(--white)">PAST TRANSACTIONS</h4><button class="btn-add-txn" onclick="toggleTxnForm()">+ Add Transaction</button></div><div class="txn-form" id="txnForm"><div class="txn-form-grid"><div class="profile-field"><label>Date</label><input type="date" id="txnDate"></div><div class="profile-field"><label>Service</label><input type="text" id="txnService" placeholder="e.g. Driveway Cleaning"></div><div class="profile-field"><label>Amount ($)</label><input type="number" id="txnAmount" placeholder="0.00" step="0.01"></div><div class="profile-field"><label>Status</label><select id="txnStatus"><option>Paid</option><option>Unpaid</option></select></div></div><div style="margin-top:.8rem;display:flex;gap:.5rem"><button class="btn-save" onclick="addTransaction()" style="padding:.5rem 1.2rem;font-size:.78rem">Add</button><button class="btn-print-inv" onclick="toggleTxnForm()" style="padding:.5rem 1rem;font-size:.78rem">Cancel</button></div></div><div id="txnTableWrap"></div></div><!-- INVOICE TAB --><div class="profile-tab-content" id="tab-invoice"><h4 style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1.5px;color:var(--white);margin-bottom:1rem">CREATE INVOICE</h4><div class="inv-fields"><div class="profile-field"><label>Invoice #</label><input type="text" id="invNumber" placeholder="INV-001"></div><div class="profile-field"><label>Date</label><input type="date" id="invDate"></div><div class="profile-field"><label>Due Date</label><input type="date" id="invDue"></div><div class="profile-field"><label>Tax %</label><input type="number" id="invTax" value="0" step="0.1"></div></div><h4 style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:1px;color:var(--gray);margin-bottom:.6rem">LINE ITEMS</h4><div class="inv-line-items" id="invLines"><div class="inv-line-row"><input type="text" placeholder="Description" class="inv-desc"><input type="number" placeholder="Qty" value="1" class="inv-qty" step="1"><input type="number" placeholder="Price" class="inv-price" step="0.01"><button class="inv-remove-line" onclick="this.parentElement.remove()">&#10005;</button></div></div><button class="btn-add-line" onclick="addInvLine()">+ Add Line Item</button><div class="inv-actions"><button class="btn-preview-inv" onclick="previewInvoice()">Preview Invoice</button><button class="btn-print-inv" onclick="printInvoice()">Print / Save PDF</button></div><div id="invoicePreviewWrap" style="margin-top:1.5rem"></div></div><!-- QUOTE TAB --><div class="profile-tab-content" id="tab-quote"><h4 style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1.5px;color:var(--white);margin-bottom:1rem">CREATE QUOTE</h4><div class="inv-fields"><div class="profile-field"><label>Quote #</label><input type="text" id="quoteNumber" placeholder="QTE-001"></div><div class="profile-field"><label>Date</label><input type="date" id="quoteDate"></div><div class="profile-field"><label>Valid Until</label><input type="date" id="quoteValid"></div><div class="profile-field"><label>Tax %</label><input type="number" id="quoteTax" value="0" step="0.1"></div></div><h4 style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:1px;color:var(--gray);margin-bottom:.6rem">LINE ITEMS</h4><div class="inv-line-items" id="quoteLines"><div class="inv-line-row"><input type="text" placeholder="Description" class="inv-desc"><input type="number" placeholder="Qty" value="1" class="inv-qty" step="1"><input type="number" placeholder="Price" class="inv-price" step="0.01"><button class="inv-remove-line" onclick="this.parentElement.remove()">&#10005;</button></div></div><button class="btn-add-line" onclick="addQuoteLine()">+ Add Line Item</button><div class="inv-actions"><button class="btn-preview-inv" onclick="previewQuote()">Preview Quote</button><button class="btn-print-inv" onclick="printQuote()">Print / Save PDF</button></div><div id="quotePreviewWrap" style="margin-top:1.5rem"></div></div></div></div></div><script>// Splash screen
+(function(){
+    const splash = document.getElementById('splash');
+    const crown = document.getElementById('splashCrown');
+    const pulse = document.getElementById('splashPulse');
+    const title = document.getElementById('splashTitle');
+    const fill = document.getElementById('splashFill');
+    const pctEl = document.getElementById('splashPercent');
+
+    // Ambient floating particles in background
+    for(let i = 0; i < 30; i++){
+        const p = document.createElement('div');
+        p.className = 'splash-bg-particle';
+        p.style.left = Math.random()*100+'%';
+        p.style.top = (60+Math.random()*40)+'%';
+        p.style.animationDuration = (3+Math.random()*4)+'s';
+        p.style.animationDelay = Math.random()*3+'s';
+        p.style.width = (1+Math.random()*2)+'px';
+        p.style.height = p.style.width;
+        splash.appendChild(p);
+    }
+
+    // Crown lands -> glow + pulse + particles
+    setTimeout(()=>{
+        crown.classList.add('landed');
+        pulse.classList.add('fire');
+        // Particle explosion
+        const rect = crown.getBoundingClientRect();
+        const cx = rect.left + rect.width/2;
+        const cy = rect.top + rect.height/2;
+        for(let i = 0; i < 40; i++){
+            const pt = document.createElement('div');
+            pt.className = 'splash-particle';
+            const angle = (Math.PI*2/40)*i + (Math.random()-.5)*.3;
+            const dist = 80 + Math.random()*120;
+            const size = 2 + Math.random()*4;
+            const colors = ['var(--cyan)','var(--blue)','var(--gold)','rgba(255,255,255,.8)'];
+            pt.style.width = size+'px';
+            pt.style.height = size+'px';
+            pt.style.background = colors[Math.floor(Math.random()*colors.length)];
+            pt.style.left = cx+'px';
+            pt.style.top = cy+'px';
+            pt.style.boxShadow = '0 0 6px '+pt.style.background;
+            splash.appendChild(pt);
+            pt.animate([
+                { opacity: 1, transform: 'translate(0,0) scale(1)' },
+                { opacity: 0, transform: 'translate('+Math.cos(angle)*dist+'px,'+Math.sin(angle)*dist+'px) scale(0)' }
+            ], { duration: 600+Math.random()*400, easing: 'cubic-bezier(.25,.46,.45,.94)', fill: 'forwards' });
+        }
+    }, 750);
+
+    // Glitch title in
+    setTimeout(()=>{ title.classList.add('glitch-in'); }, 1000);
+
+    // Percentage counter
+    let pct = 0;
+    const counterStart = 1300;
+    const counterDur = 1800;
+    const startTime = performance.now() + counterStart;
+    function tickCounter(now){
+        const elapsed = now - startTime;
+        if(elapsed < 0){ requestAnimationFrame(tickCounter); return; }
+        pct = Math.min(100, Math.round((elapsed/counterDur)*100));
+        pctEl.textContent = pct+'%';
+        fill.style.width = pct+'%';
+        if(pct < 100) requestAnimationFrame(tickCounter);
+        else setTimeout(()=>splash.classList.add('done'), 400);
+    }
+    requestAnimationFrame(tickCounter);
+})();
+
+(function() {
+        const c=document.getElementById('heroP'); for(let i=0; i<50; i++) {
+            const d=document.createElement('div'); d.className='wdrop'; d.style.left=Math.random()*100+'%'; d.style.animationDuration=(3+Math.random()*5)+'s'; d.style.animationDelay=Math.random()*5+'s'; d.style.width=(2+Math.random()*3)+'px'; d.style.height=(8+Math.random()*12)+'px'; c.appendChild(d);
+        }
+    })();
+
+window.addEventListener('scroll', ()=> {
+        document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY>50);
+    });
+
+function handleSubmit(e) {
+    e.preventDefault();
+    const f = document.getElementById('quoteForm');
+    const inputs = f.querySelectorAll('input, select, textarea');
+    const lead = {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        date: new Date().toISOString(),
+        firstName: inputs[0].value || '',
+        lastName: inputs[1].value || '',
+        email: inputs[2].value || '',
+        phone: inputs[3].value || '',
+        address: inputs[4].value || '',
+        neighborhood: inputs[5].value || '',
+        service: inputs[6].value || '',
+        sqft: inputs[7].value || '',
+        details: inputs[8].value || '',
+        photo: document.getElementById('photoInput').files.length > 0 ? document.getElementById('photoInput').files[0].name : '',
+        status: 'New',
+        notes: ''
+    };
+    const leads = JSON.parse(localStorage.getItem('azck_leads') || '[]');
+    leads.unshift(lead);
+    localStorage.setItem('azck_leads', JSON.stringify(leads));
+    f.style.display='none';
+    document.getElementById('formSuccess').style.display='block';
+}
+
+function handlePhotoUpload(input) {
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        if (file.size > 10 * 1024 * 1024) {
+            alert('File is too large. Please choose an image under 10MB.');
+            input.value = '';
+            return;
+        }
+        document.getElementById('fileName').textContent = file.name;
+        document.getElementById('uploadPreview').classList.add('active');
+    }
+}
+
+function removePhoto() {
+    document.getElementById('photoInput').value = '';
+    document.getElementById('uploadPreview').classList.remove('active');
+    document.getElementById('fileName').textContent = '';
+}
+
+function baS(e, c) {
+    const r=c.getBoundingClientRect();
+    const p=Math.max(5, Math.min(95, ((e.clientX-r.left)/r.width)*100));
+
+    c.querySelector('.ba-before').style.clipPath=`inset(0 ${100-p}% 0 0)`;
+    c.querySelector('.ba-div').style.left=p+'%';
+}
+
+function baT(e, c) {
+    e.preventDefault();
+    const t=e.touches[0];
+    const r=c.getBoundingClientRect();
+    const p=Math.max(5, Math.min(95, ((t.clientX-r.left)/r.width)*100));
+    c.querySelector('.ba-before').style.clipPath=`inset(0 ${100-p}% 0 0)`;
+    c.querySelector('.ba-div').style.left=p+'%';
+}
+
+const ro=new IntersectionObserver(e=> {
+        e.forEach(x=> {
+                if(x.isIntersecting)x.target.classList.add('vis');
+            });
+    }
+
+    , {
+    threshold:.08, rootMargin:'0px 0px -30px 0px'
+});
+document.querySelectorAll('.rv,.rvl,.rvr').forEach(el=>ro.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(a=> {
+        a.addEventListener('click', ()=> {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+    });
+
+// ===== ADMIN PANEL =====
+let currentFilter = 'all';
+let currentSearch = '';
+let profileId = null;
+let photoTarget = '';
+
+function showAdmin() {
+    document.getElementById('adminOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminDash').style.display = 'block';
+    renderLeads();
+    renderCalendar();
+}
+
+function closeAdmin() {
+    document.getElementById('adminOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+    closeCalPopup();
+}
+
+function adminLogin() {
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminDash').style.display = 'block';
+    renderLeads();
+    renderCalendar();
+}
+
+function getLeads() {
+    return JSON.parse(localStorage.getItem('azck_leads') || '[]');
+}
+
+function saveLeads(leads) {
+    localStorage.setItem('azck_leads', JSON.stringify(leads));
+}
+
+function esc(s) {
+    if (!s) return '';
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+}
+
+// ---- RENDER TABLE ----
+function renderLeads() {
+    const leads = getLeads();
+    updateStats(leads);
+    let filtered = leads;
+    if (currentFilter !== 'all') filtered = filtered.filter(l => l.status === currentFilter);
+    if (currentSearch) {
+        const s = currentSearch.toLowerCase();
+        filtered = filtered.filter(l =>
+            (l.firstName + ' ' + l.lastName).toLowerCase().includes(s) ||
+            l.email.toLowerCase().includes(s) ||
+            l.phone.includes(s) ||
+            l.service.toLowerCase().includes(s) ||
+            l.neighborhood.toLowerCase().includes(s)
+        );
+    }
+    const tbody = document.getElementById('leadsBody');
+    if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" class="no-leads">No leads found' + (currentFilter !== 'all' ? ' for this status' : '') + '.</td></tr>';
+        return;
+    }
+    const statuses = ['New','Contacted','Quoted','Booked','Completed','Lost'];
+    tbody.innerHTML = filtered.map(l => {
+        const d = new Date(l.date);
+        const dateStr = (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+        const opts = statuses.map(s => '<option' + (s === l.status ? ' selected' : '') + '>' + s + '</option>').join('');
+        const notePreview = l.notes ? (l.notes.length > 25 ? l.notes.slice(0,25) + '...' : l.notes) : '<span style="color:#334155">\u2014</span>';
+        return '<tr>' +
+            '<td>' + dateStr + '</td>' +
+            '<td style="color:var(--white);font-weight:600;cursor:pointer;text-decoration:underline;text-decoration-color:rgba(0,212,255,.3)" onclick="openProfile(\'' + l.id + '\')">' + esc(l.firstName) + ' ' + esc(l.lastName) + '</td>' +
+            '<td>' + esc(l.email) + '<br><span style="color:var(--gray)">' + esc(l.phone) + '</span></td>' +
+            '<td>' + esc(l.service) + '</td>' +
+            '<td>' + esc(l.neighborhood || '\u2014') + '</td>' +
+            '<td><select class="status-select" onchange="quickStatus(\'' + l.id + '\',this.value)">' + opts + '</select></td>' +
+            '<td>' + notePreview + '</td>' +
+            '<td><div class="lead-actions">' +
+                '<button class="lead-act" onclick="openProfile(\'' + l.id + '\')">View</button>' +
+                '<button class="lead-act del" onclick="deleteLead(\'' + l.id + '\')">Del</button>' +
+            '</div></td>' +
+        '</tr>';
+    }).join('');
+}
+
+function updateStats(leads) {
+    const counts = { New: 0, Contacted: 0, Quoted: 0, Booked: 0 };
+    leads.forEach(l => { if (counts[l.status] !== undefined) counts[l.status]++; });
+    document.getElementById('statNew').textContent = counts.New;
+    document.getElementById('statContacted').textContent = counts.Contacted;
+    document.getElementById('statQuoted').textContent = counts.Quoted;
+    document.getElementById('statBooked').textContent = counts.Booked;
+    document.getElementById('statTotal').textContent = leads.length;
+}
+
+function filterLeads(status, btn) {
+    currentFilter = status;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderLeads();
+}
+
+function searchLeads(val) {
+    currentSearch = val;
+    renderLeads();
+}
+
+function quickStatus(id, val) {
+    const leads = getLeads();
+    const l = leads.find(x => x.id === id);
+    if (l) { l.status = val; saveLeads(leads); updateStats(leads); }
+}
+
+function deleteLead(id) {
+    if (!confirm('Delete this lead?')) return;
+    const leads = getLeads().filter(l => l.id !== id);
+    saveLeads(leads);
+    renderLeads();
+}
+
+// ---- PROFILE PANEL ----
+function openProfile(id) {
+    const leads = getLeads();
+    const l = leads.find(x => x.id === id);
+    if (!l) return;
+    profileId = id;
+    // Init data arrays if missing
+    if (!l.beforePhotos) l.beforePhotos = [];
+    if (!l.afterPhotos) l.afterPhotos = [];
+    if (!l.transactions) l.transactions = [];
+    saveLeads(leads);
+    // Header
+    document.getElementById('profileName').textContent = (l.firstName + ' ' + l.lastName).trim() || 'Unnamed Lead';
+    document.getElementById('profileEmail').textContent = l.email || '—';
+    document.getElementById('profilePhone').textContent = l.phone || '—';
+    document.getElementById('profileHood').textContent = l.neighborhood || '—';
+    // Details tab
+    document.getElementById('pFirstName').value = l.firstName || '';
+    document.getElementById('pLastName').value = l.lastName || '';
+    document.getElementById('pEmail').value = l.email || '';
+    document.getElementById('pPhone').value = l.phone || '';
+    document.getElementById('pAddress').value = l.address || '';
+    document.getElementById('pNeighborhood').value = l.neighborhood || '';
+    document.getElementById('pService').value = l.service || '';
+    document.getElementById('pSqft').value = l.sqft || '';
+    document.getElementById('pStatus').value = l.status || 'New';
+    document.getElementById('pJobDate').value = l.jobDate || '';
+    document.getElementById('pNotes').value = l.notes || '';
+    document.getElementById('pDetails').value = l.details || '';
+    // Photos
+    renderPhotos(l);
+    // Transactions
+    renderTransactions(l);
+    // Invoice defaults
+    document.getElementById('invNumber').value = 'INV-' + String(l.transactions.length + 1).padStart(3, '0');
+    document.getElementById('invDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('invDue').value = '';
+    document.getElementById('invTax').value = '0';
+    document.getElementById('invLines').innerHTML = '<div class="inv-line-row"><input type="text" placeholder="Description" class="inv-desc" value="' + esc(l.service || '') + '"><input type="number" placeholder="Qty" value="1" class="inv-qty" step="1"><input type="number" placeholder="Price" class="inv-price" step="0.01"><button class="inv-remove-line" onclick="this.parentElement.remove()">&#10005;</button></div>';
+    document.getElementById('invoicePreviewWrap').innerHTML = '';
+    // Quote defaults
+    document.getElementById('quoteNumber').value = 'QTE-' + String(l.transactions.length + 1).padStart(3, '0');
+    document.getElementById('quoteDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('quoteValid').value = '';
+    document.getElementById('quoteTax').value = '0';
+    document.getElementById('quoteLines').innerHTML = '<div class="inv-line-row"><input type="text" placeholder="Description" class="inv-desc" value="' + esc(l.service || '') + '"><input type="number" placeholder="Qty" value="1" class="inv-qty" step="1"><input type="number" placeholder="Price" class="inv-price" step="0.01"><button class="inv-remove-line" onclick="this.parentElement.remove()">&#10005;</button></div>';
+    document.getElementById('quotePreviewWrap').innerHTML = '';
+    // Reset to details tab
+    switchTab('details', document.querySelector('.profile-tab'));
+    document.getElementById('profileModal').classList.add('active');
+}
+
+function closeProfile() {
+    document.getElementById('profileModal').classList.remove('active');
+    profileId = null;
+    renderLeads();
+}
+
+function switchTab(name, btn) {
+    document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.profile-tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + name).classList.add('active');
+}
+
+function saveProfile() {
+    const leads = getLeads();
+    const l = leads.find(x => x.id === profileId);
+    if (!l) return;
+    l.firstName = document.getElementById('pFirstName').value;
+    l.lastName = document.getElementById('pLastName').value;
+    l.email = document.getElementById('pEmail').value;
+    l.phone = document.getElementById('pPhone').value;
+    l.address = document.getElementById('pAddress').value;
+    l.neighborhood = document.getElementById('pNeighborhood').value;
+    l.service = document.getElementById('pService').value;
+    l.sqft = document.getElementById('pSqft').value;
+    l.status = document.getElementById('pStatus').value;
+    l.jobDate = document.getElementById('pJobDate').value;
+    l.notes = document.getElementById('pNotes').value;
+    saveLeads(leads);
+    // Update header
+    document.getElementById('profileName').textContent = (l.firstName + ' ' + l.lastName).trim();
+    document.getElementById('profileEmail').textContent = l.email || '—';
+    document.getElementById('profilePhone').textContent = l.phone || '—';
+    document.getElementById('profileHood').textContent = l.neighborhood || '—';
+    renderCalendar();
+    alert('Lead saved!');
+}
+
+// ---- PHOTOS ----
+function renderPhotos(l) {
+    const bGrid = document.getElementById('beforePhotos');
+    const aGrid = document.getElementById('afterPhotos');
+    let bHtml = (l.beforePhotos || []).map((src, i) =>
+        '<div class="photo-thumb"><img src="' + src + '"><button class="photo-remove" onclick="removeProfilePhoto(\'before\',' + i + ')">&#10005;</button></div>'
+    ).join('');
+    bHtml += '<div class="photo-add" onclick="addPhoto(\'before\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Photo</div>';
+    bGrid.innerHTML = bHtml;
+
+    let aHtml = (l.afterPhotos || []).map((src, i) =>
+        '<div class="photo-thumb"><img src="' + src + '"><button class="photo-remove" onclick="removeProfilePhoto(\'after\',' + i + ')">&#10005;</button></div>'
+    ).join('');
+    aHtml += '<div class="photo-add" onclick="addPhoto(\'after\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add Photo</div>';
+    aGrid.innerHTML = aHtml;
+}
+
+function addPhoto(type) {
+    photoTarget = type;
+    document.getElementById('photoFileInput').click();
+}
+
+function handleProfilePhoto(input) {
+    if (!input.files || !input.files.length) return;
+    const leads = getLeads();
+    const l = leads.find(x => x.id === profileId);
+    if (!l) return;
+    const key = photoTarget === 'before' ? 'beforePhotos' : 'afterPhotos';
+    if (!l[key]) l[key] = [];
+
+    Array.from(input.files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            l[key].push(e.target.result);
+            saveLeads(leads);
+            renderPhotos(l);
+        };
+        reader.readAsDataURL(file);
+    });
+    input.value = '';
+}
+
+function removeProfilePhoto(type, idx) {
+    const leads = getLeads();
+    const l = leads.find(x => x.id === profileId);
+    if (!l) return;
+    const key = type === 'before' ? 'beforePhotos' : 'afterPhotos';
+    l[key].splice(idx, 1);
+    saveLeads(leads);
+    renderPhotos(l);
+}
+
+// ---- TRANSACTIONS ----
+function renderTransactions(l) {
+    const wrap = document.getElementById('txnTableWrap');
+    const txns = l.transactions || [];
+    if (txns.length === 0) {
+        wrap.innerHTML = '<div class="no-txn">No transactions yet.</div>';
+        return;
+    }
+    let total = 0;
+    let html = '<table class="txn-table"><thead><tr><th>Date</th><th>Service</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody>';
+    txns.forEach((t, i) => {
+        total += parseFloat(t.amount) || 0;
+        html += '<tr><td>' + esc(t.date) + '</td><td>' + esc(t.service) + '</td><td>$' + parseFloat(t.amount).toFixed(2) + '</td><td class="' + (t.status === 'Paid' ? 'txn-paid' : 'txn-unpaid') + '">' + t.status + '</td><td><button class="lead-act del" onclick="removeTxn(' + i + ')">&#10005;</button></td></tr>';
+    });
+    html += '</tbody></table>';
+    html += '<div style="text-align:right;padding:.8rem 1rem;font-size:.85rem;color:var(--white);font-weight:700">Total: $' + total.toFixed(2) + '</div>';
+    wrap.innerHTML = html;
+}
+
+function toggleTxnForm() {
+    document.getElementById('txnForm').classList.toggle('active');
+}
+
+function addTransaction() {
+    const leads = getLeads();
+    const l = leads.find(x => x.id === profileId);
+    if (!l) return;
+    if (!l.transactions) l.transactions = [];
+    l.transactions.push({
+        date: document.getElementById('txnDate').value || new Date().toISOString().split('T')[0],
+        service: document.getElementById('txnService').value,
+        amount: document.getElementById('txnAmount').value || '0',
+        status: document.getElementById('txnStatus').value
+    });
+    saveLeads(leads);
+    renderTransactions(l);
+    toggleTxnForm();
+    document.getElementById('txnDate').value = '';
+    document.getElementById('txnService').value = '';
+    document.getElementById('txnAmount').value = '';
+}
+
+function removeTxn(idx) {
+    const leads = getLeads();
+    const l = leads.find(x => x.id === profileId);
+    if (!l) return;
+    l.transactions.splice(idx, 1);
+    saveLeads(leads);
+    renderTransactions(l);
+}
+
+// ---- INVOICE ----
+function addInvLine() {
+    document.getElementById('invLines').insertAdjacentHTML('beforeend',
+        '<div class="inv-line-row"><input type="text" placeholder="Description" class="inv-desc"><input type="number" placeholder="Qty" value="1" class="inv-qty" step="1"><input type="number" placeholder="Price" class="inv-price" step="0.01"><button class="inv-remove-line" onclick="this.parentElement.remove()">&#10005;</button></div>'
+    );
+}
+
+function getInvLineData(containerId) {
+    const rows = document.getElementById(containerId).querySelectorAll('.inv-line-row');
+    const items = [];
+    rows.forEach(r => {
+        const desc = r.querySelector('.inv-desc').value;
+        const qty = parseFloat(r.querySelector('.inv-qty').value) || 0;
+        const price = parseFloat(r.querySelector('.inv-price').value) || 0;
+        if (desc) items.push({ desc, qty, price, total: qty * price });
+    });
+    return items;
+}
+
+function buildDocHTML(type, docNum, docDate, validOrDue, taxPct, items) {
+    const leads = getLeads();
+    const l = leads.find(x => x.id === profileId);
+    if (!l) return '';
+    const subtotal = items.reduce((s, i) => s + i.total, 0);
+    const tax = subtotal * (taxPct / 100);
+    const total = subtotal + tax;
+    const isQuote = type === 'QUOTE';
+    const validLabel = isQuote ? 'Valid Until' : 'Due Date';
+
+    return '<div class="invoice-preview">' +
+        '<div class="invoice-top"><div class="invoice-brand"><img src="Company Logo.png" alt="AZ Concrete King" style="height:40px;margin-bottom:.5rem"><h2>AZ CONCRETE KING</h2><p>Anthem & Vistancia, AZ<br>info@azconcreteking.com</p></div>' +
+        '<div class="invoice-label"><h3>' + type + '</h3><p>#' + esc(docNum) + '<br>' + esc(docDate) + '</p></div></div>' +
+        '<div class="invoice-parties"><div><h4>' + type + ' To</h4><p>' + esc(l.firstName + ' ' + l.lastName) + '<br>' + esc(l.email) + '<br>' + esc(l.phone) + (l.address ? '<br>' + esc(l.address) : '') + '</p></div>' +
+        '<div><h4>' + validLabel + '</h4><p>' + (validOrDue || 'Upon receipt') + '</p></div></div>' +
+        '<table class="invoice-items"><thead><tr><th>Description</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>' +
+        items.map(i => '<tr><td>' + esc(i.desc) + '</td><td>' + i.qty + '</td><td>$' + i.price.toFixed(2) + '</td><td>$' + i.total.toFixed(2) + '</td></tr>').join('') +
+        '</tbody></table>' +
+        '<div class="invoice-total">' +
+        '<div class="invoice-total-line"><span>Subtotal</span><span>$' + subtotal.toFixed(2) + '</span></div>' +
+        (taxPct > 0 ? '<div class="invoice-total-line"><span>Tax (' + taxPct + '%)</span><span>$' + tax.toFixed(2) + '</span></div>' : '') +
+        '<div class="invoice-total-line grand"><span>Total</span><span>$' + total.toFixed(2) + '</span></div></div>' +
+        '<div class="invoice-footer">Thank you for choosing AZ Concrete King!</div></div>';
+}
+
+function previewInvoice() {
+    const items = getInvLineData('invLines');
+    if (items.length === 0) { alert('Add at least one line item.'); return; }
+    const html = buildDocHTML('INVOICE',
+        document.getElementById('invNumber').value,
+        document.getElementById('invDate').value,
+        document.getElementById('invDue').value,
+        parseFloat(document.getElementById('invTax').value) || 0,
+        items
+    );
+    document.getElementById('invoicePreviewWrap').innerHTML = html;
+}
+
+function printInvoice() {
+    previewInvoice();
+    setTimeout(() => {
+        const content = document.getElementById('invoicePreviewWrap').innerHTML;
+        const w = window.open('', '_blank');
+        w.document.write('<html><head><title>Invoice</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet"><style>body{font-family:"Inter",sans-serif;padding:2rem;color:#1a1a2e}h2,h3{font-family:"Bebas Neue",sans-serif}.invoice-preview{max-width:600px;margin:0 auto}.invoice-top{display:flex;justify-content:space-between;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:2px solid #e2e8f0}.invoice-brand img{height:40px;margin-bottom:.5rem}.invoice-brand h2{font-size:1.6rem;letter-spacing:2px;margin:0}.invoice-brand p{font-size:.75rem;color:#64748b;margin:.3rem 0 0}.invoice-label{text-align:right}.invoice-label h3{font-size:2rem;letter-spacing:3px;color:#0088ff;margin:0}.invoice-label p{font-size:.75rem;color:#64748b;margin:.3rem 0 0}.invoice-parties{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem}.invoice-parties h4{font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin:0 0 .4rem;font-weight:700}.invoice-parties p{font-size:.82rem;color:#334155;line-height:1.6;margin:0}.invoice-items{width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:.82rem}.invoice-items th{background:#f1f5f9;padding:.6rem .8rem;text-align:left;font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:#64748b;font-weight:700}.invoice-items th:last-child{text-align:right}.invoice-items td{padding:.6rem .8rem;border-bottom:1px solid #e2e8f0;color:#334155}.invoice-items td:last-child{text-align:right;font-weight:600}.invoice-total{text-align:right;margin-bottom:2rem}.invoice-total-line{display:flex;justify-content:flex-end;gap:2rem;padding:.3rem 0;font-size:.82rem;color:#64748b}.invoice-total-line.grand{font-size:1.1rem;font-weight:700;color:#0a1225;border-top:2px solid #e2e8f0;padding-top:.8rem;margin-top:.5rem}.invoice-footer{text-align:center;padding-top:1.5rem;border-top:1px solid #e2e8f0;font-size:.72rem;color:#94a3b8}</style></head><body>' + content + '</body></html>');
+        w.document.close();
+        w.focus();
+        w.print();
+    }, 100);
+}
+
+// ---- QUOTE ----
+function addQuoteLine() {
+    document.getElementById('quoteLines').insertAdjacentHTML('beforeend',
+        '<div class="inv-line-row"><input type="text" placeholder="Description" class="inv-desc"><input type="number" placeholder="Qty" value="1" class="inv-qty" step="1"><input type="number" placeholder="Price" class="inv-price" step="0.01"><button class="inv-remove-line" onclick="this.parentElement.remove()">&#10005;</button></div>'
+    );
+}
+
+function previewQuote() {
+    const items = getInvLineData('quoteLines');
+    if (items.length === 0) { alert('Add at least one line item.'); return; }
+    const html = buildDocHTML('QUOTE',
+        document.getElementById('quoteNumber').value,
+        document.getElementById('quoteDate').value,
+        document.getElementById('quoteValid').value,
+        parseFloat(document.getElementById('quoteTax').value) || 0,
+        items
+    );
+    document.getElementById('quotePreviewWrap').innerHTML = html;
+}
+
+function printQuote() {
+    previewQuote();
+    setTimeout(() => {
+        const content = document.getElementById('quotePreviewWrap').innerHTML;
+        const w = window.open('', '_blank');
+        w.document.write('<html><head><title>Quote</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet"><style>body{font-family:"Inter",sans-serif;padding:2rem;color:#1a1a2e}h2,h3{font-family:"Bebas Neue",sans-serif}.invoice-preview{max-width:600px;margin:0 auto}.invoice-top{display:flex;justify-content:space-between;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:2px solid #e2e8f0}.invoice-brand img{height:40px;margin-bottom:.5rem}.invoice-brand h2{font-size:1.6rem;letter-spacing:2px;margin:0}.invoice-brand p{font-size:.75rem;color:#64748b;margin:.3rem 0 0}.invoice-label{text-align:right}.invoice-label h3{font-size:2rem;letter-spacing:3px;color:#0088ff;margin:0}.invoice-label p{font-size:.75rem;color:#64748b;margin:.3rem 0 0}.invoice-parties{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem}.invoice-parties h4{font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin:0 0 .4rem;font-weight:700}.invoice-parties p{font-size:.82rem;color:#334155;line-height:1.6;margin:0}.invoice-items{width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:.82rem}.invoice-items th{background:#f1f5f9;padding:.6rem .8rem;text-align:left;font-size:.65rem;text-transform:uppercase;letter-spacing:1px;color:#64748b;font-weight:700}.invoice-items th:last-child{text-align:right}.invoice-items td{padding:.6rem .8rem;border-bottom:1px solid #e2e8f0;color:#334155}.invoice-items td:last-child{text-align:right;font-weight:600}.invoice-total{text-align:right;margin-bottom:2rem}.invoice-total-line{display:flex;justify-content:flex-end;gap:2rem;padding:.3rem 0;font-size:.82rem;color:#64748b}.invoice-total-line.grand{font-size:1.1rem;font-weight:700;color:#0a1225;border-top:2px solid #e2e8f0;padding-top:.8rem;margin-top:.5rem}.invoice-footer{text-align:center;padding-top:1.5rem;border-top:1px solid #e2e8f0;font-size:.72rem;color:#94a3b8}</style></head><body>' + content + '</body></html>');
+        w.document.close();
+        w.focus();
+        w.print();
+    }, 100);
+}
+
+// ===== CALENDAR =====
+let calYear, calMonth2;
+(function() {
+    const now = new Date();
+    calYear = now.getFullYear();
+    calMonth2 = now.getMonth();
+})();
+
+const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function renderCalendar() {
+    document.getElementById('calMonth').textContent = monthNames[calMonth2] + ' ' + calYear;
+    const first = new Date(calYear, calMonth2, 1);
+    const last = new Date(calYear, calMonth2 + 1, 0);
+    const startDay = first.getDay();
+    const daysInMonth = last.getDate();
+    const prevLast = new Date(calYear, calMonth2, 0).getDate();
+
+    const leads = getLeads();
+    // Map leads to calendar by jobDate (only shows leads with a job date set)
+    const dateMap = {};
+    leads.forEach(l => {
+        const dateKey = l.jobDate || '';
+        if (dateKey) {
+            if (!dateMap[dateKey]) dateMap[dateKey] = [];
+            dateMap[dateKey].push(l);
+        }
+    });
+
+    const today = new Date();
+    const todayKey = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+
+    let html = '';
+    // Previous month trailing days
+    for (let i = startDay - 1; i >= 0; i--) {
+        const d = prevLast - i;
+        html += '<div class="cal-day"><div class="cal-day-num">' + d + '</div></div>';
+    }
+    // Current month days
+    for (let d = 1; d <= daysInMonth; d++) {
+        const key = calYear + '-' + String(calMonth2+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+        const isToday = key === todayKey;
+        const dayLeads = dateMap[key] || [];
+        let jobsHtml = '';
+        const maxShow = 3;
+        dayLeads.slice(0, maxShow).forEach(l => {
+            const cls = 'job-' + l.status.toLowerCase();
+            const name = (l.firstName || '') + ' ' + (l.lastName || '').charAt(0);
+            jobsHtml += '<div class="cal-job ' + cls + '" onclick="event.stopPropagation();showCalPopup(\'' + l.id + '\',event)">' + esc(name.trim()) + ' - ' + esc(l.service || '?') + '</div>';
+        });
+        if (dayLeads.length > maxShow) {
+            jobsHtml += '<div class="cal-more" onclick="event.stopPropagation()">+' + (dayLeads.length - maxShow) + ' more</div>';
+        }
+        html += '<div class="cal-day current-month' + (isToday ? ' today' : '') + '"><div class="cal-day-num">' + d + '</div>' + jobsHtml + '</div>';
+    }
+    // Next month leading days
+    const totalCells = startDay + daysInMonth;
+    const remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+    for (let d = 1; d <= remaining; d++) {
+        html += '<div class="cal-day"><div class="cal-day-num">' + d + '</div></div>';
+    }
+
+    document.getElementById('calDays').innerHTML = html;
+}
+
+function calPrev() {
+    calMonth2--;
+    if (calMonth2 < 0) { calMonth2 = 11; calYear--; }
+    renderCalendar();
+}
+
+function calNext() {
+    calMonth2++;
+    if (calMonth2 > 11) { calMonth2 = 0; calYear++; }
+    renderCalendar();
+}
+
+function calToday() {
+    const now = new Date();
+    calYear = now.getFullYear();
+    calMonth2 = now.getMonth();
+    renderCalendar();
+}
+
+function showCalPopup(id, evt) {
+    const leads = getLeads();
+    const l = leads.find(x => x.id === id);
+    if (!l) return;
+
+    document.getElementById('popupName').textContent = (l.firstName + ' ' + l.lastName).trim() || 'Unnamed';
+    document.getElementById('popupService').textContent = l.service || '\u2014';
+    document.getElementById('popupStatus').innerHTML = '<span class="status-badge st-' + l.status.toLowerCase() + '">' + l.status + '</span>';
+    document.getElementById('popupPhone').textContent = l.phone || '\u2014';
+    document.getElementById('popupEmail').textContent = l.email || '\u2014';
+    document.getElementById('popupAddress').textContent = l.address || '\u2014';
+    document.getElementById('popupArea').textContent = l.neighborhood || '\u2014';
+    document.getElementById('popupSqft').textContent = l.sqft ? l.sqft + ' sqft' : '\u2014';
+    document.getElementById('popupNotes').textContent = l.notes || l.details || '\u2014';
+    document.getElementById('popupViewBtn').onclick = function() { closeCalPopup(); openProfile(id); };
+
+    const popup = document.getElementById('calPopup');
+    popup.classList.add('active');
+
+    // Position near click
+    const rect = document.getElementById('adminOverlay').getBoundingClientRect();
+    let x = evt.clientX - rect.left + 10;
+    let y = evt.clientY - rect.top + 10;
+    // Keep in viewport
+    if (x + 330 > rect.width) x = x - 340;
+    if (y + 350 > window.innerHeight) y = y - 300;
+    if (x < 10) x = 10;
+    if (y < 10) y = 10;
+    popup.style.left = x + 'px';
+    popup.style.top = y + 'px';
+    popup.style.position = 'absolute';
+}
+
+function closeCalPopup() {
+    document.getElementById('calPopup').classList.remove('active');
+}
+
+// Close popup when clicking outside
+document.addEventListener('click', function(e) {
+    const popup = document.getElementById('calPopup');
+    if (popup && popup.classList.contains('active') && !popup.contains(e.target) && !e.target.classList.contains('cal-job')) {
+        closeCalPopup();
+    }
+});
+</script></body></html>
