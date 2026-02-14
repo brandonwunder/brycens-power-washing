@@ -1,0 +1,97 @@
+/* ===========================================
+   AZ Concrete King — CSS Custom Properties
+   =========================================== */
+
+:root {
+  /* Colors */
+  --color-primary: #1B4F72;
+  --color-primary-dark: #154360;
+  --color-secondary: #E67E22;
+  --color-secondary-dark: #D35400;
+  --color-background: #FFFFFF;
+  --color-background-alt: #F4F6F7;
+  --color-text: #2C3E50;
+  --color-text-light: #5D6D7E;
+  --color-accent: #3498DB;
+  --color-accent-dark: #2980B9;
+  --color-white: #FFFFFF;
+  --color-black: #1A1A1A;
+  --color-star: #F1C40F;
+  --color-border: #D5DBDB;
+  --color-success: #27AE60;
+  --color-error: #E74C3C;
+
+  /* King Branding — Gold Accent */
+  --color-gold: #D4A017;
+  --color-gold-light: #F4D03F;
+  --color-gold-dark: #B8860B;
+
+  /* Gradients */
+  --gradient-hero: linear-gradient(135deg, #1B4F72 0%, #154360 50%, #0E2F44 100%);
+  --gradient-gold: linear-gradient(135deg, #D4A017, #F4D03F);
+  --gradient-cta: linear-gradient(135deg, #E67E22, #D35400);
+
+  /* Overlays */
+  --overlay-dark: rgba(14, 47, 68, 0.85);
+  --overlay-medium: rgba(27, 79, 114, 0.7);
+
+  /* Typography */
+  --font-heading: 'Montserrat', Arial, Helvetica, sans-serif;
+  --font-body: 'Open Sans', Arial, Helvetica, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Font Sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+
+  /* Layout */
+  --max-width: 1200px;
+  --nav-height: 70px;
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+
+  /* Animation Durations */
+  --anim-fast: 150ms;
+  --anim-base: 300ms;
+  --anim-slow: 600ms;
+  --anim-hero: 1000ms;
+  --anim-spray: 2000ms;
+
+  /* Animation Easings */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Before/After Slider */
+  --slider-handle-size: 48px;
+  --slider-line-width: 3px;
+}
