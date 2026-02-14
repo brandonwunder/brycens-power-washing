@@ -391,9 +391,9 @@ nav.scrolled {
     inset: 0;
     background-image: url('Background picture.png');
     background-size: cover;
-    background-position: center;
+    background-position: center top;
     background-repeat: no-repeat;
-    opacity: 0.12;
+    opacity: 0.45;
     z-index: 0;
 }
 
@@ -401,7 +401,13 @@ nav.scrolled {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(5, 10, 20, 0.4) 0%, rgba(5, 10, 20, 0.7) 70%, rgba(5, 10, 20, 0.95) 100%);
+    background: linear-gradient(
+        to bottom,
+        rgba(5, 10, 20, 0.15) 0%,
+        rgba(5, 10, 20, 0.35) 35%,
+        rgba(5, 10, 20, 0.65) 65%,
+        rgba(5, 10, 20, 0.92) 100%
+    );
 }
 
 .hero-grid {
