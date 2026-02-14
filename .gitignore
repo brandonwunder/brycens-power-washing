@@ -9,12 +9,18 @@ desktop.ini
 *.swp
 *.swo
 
-# Node (for tools)
+# Dependencies
 node_modules/
+
+# Next.js
+.next/
+out/
+next-env.d.ts
 
 # Environment
 .env
 .env.local
+.env.production
 
 # Claude Code session artifacts
 .claude/plans/
