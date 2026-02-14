@@ -48,7 +48,7 @@ a {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    transition: opacity .8s, visibility .8s;
+    transition: opacity .4s, visibility .4s;
     overflow: hidden;
 }
 
@@ -69,7 +69,7 @@ a {
 .splash-crown {
     width: 160px;
     height: 160px;
-    animation: crownDrop .8s cubic-bezier(.34, 1.56, .64, 1) forwards;
+    animation: crownDrop .4s cubic-bezier(.34, 1.56, .64, 1) forwards;
     opacity: 0;
     position: relative;
     z-index: 3;
@@ -3731,17 +3731,17 @@ no-pressure quote today.</p><a href="#quote" class="btn" style="margin-top:1rem;
             pt.animate([
                 { opacity: 1, transform: 'translate(0,0) scale(1)' },
                 { opacity: 0, transform: 'translate('+Math.cos(angle)*dist+'px,'+Math.sin(angle)*dist+'px) scale(0)' }
-            ], { duration: 600+Math.random()*400, easing: 'cubic-bezier(.25,.46,.45,.94)', fill: 'forwards' });
+            ], { duration: 300+Math.random()*200, easing: 'cubic-bezier(.25,.46,.45,.94)', fill: 'forwards' });
         }
-    }, 750);
+    }, 375);
 
     // Glitch title in
-    setTimeout(()=>{ title.classList.add('glitch-in'); }, 1000);
+    setTimeout(()=>{ title.classList.add('glitch-in'); }, 500);
 
     // Percentage counter
     let pct = 0;
-    const counterStart = 1300;
-    const counterDur = 1800;
+    const counterStart = 650;
+    const counterDur = 900;
     const startTime = performance.now() + counterStart;
     function tickCounter(now){
         const elapsed = now - startTime;
@@ -3750,7 +3750,7 @@ no-pressure quote today.</p><a href="#quote" class="btn" style="margin-top:1rem;
         pctEl.textContent = pct+'%';
         fill.style.width = pct+'%';
         if(pct < 100) requestAnimationFrame(tickCounter);
-        else setTimeout(()=>splash.classList.add('done'), 400);
+        else setTimeout(()=>splash.classList.add('done'), 200);
     }
     requestAnimationFrame(tickCounter);
 })();
